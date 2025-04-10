@@ -1,0 +1,17 @@
+#gallery-preview, #favorite-preview {
+  display: none;
+}
+#fourier-tooltip {
+  display: inline-block;
+  position: fixed;
+  top: calc(var(--my) + 8px);
+  left: calc(var(--mx) + 16px);
+  z-index: 3621;
+  border-radius: 4px;
+  border: 1px solid #fff4;
+  background-color: #000c;
+  padding: 4px 8px;
+  user-select: none;
+  pointer-events: none;
+  opacity: var(--opacity);
+}

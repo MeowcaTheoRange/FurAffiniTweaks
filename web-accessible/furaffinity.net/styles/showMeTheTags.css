@@ -1,0 +1,17 @@
+section.gallery.nodesc figure {
+  padding-bottom: 40px !important;
+}
+
+section.gallery b figcaption {
+  display: none !important;
+}
+section.gallery b:hover figcaption {
+  display: block !important;
+}
+
+section.gallery.nodesc figure > figcaption {
+  display: block !important;
+}
+section.gallery figure > figcaption {
+  display: block !important;
+}

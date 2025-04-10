@@ -1,0 +1,34 @@
+{
+  "manifest_version": 3,
+  "name": "FurAffiniTweaks",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "furaffinitweaks@abtmtr.link"
+    }
+  },
+  "version": "0.1",
+  "description": "FurAffinity site tweaks.",
+  "icons": {
+    "48": "icons/fua-48.png",
+    "96": "icons/fua-96.png"
+  },
+  "browser_action": {
+    "default_icon": "icons/fua-32.png",
+    "default_title": "FurAffiniTweaks",
+    "default_popup": "pages/popup/index.html"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["web-accessible/furaffinity.net/*"],
+      "matches": ["*://*.furaffinity.net/*"]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": ["*://*.furaffinity.net/*"],
+      "js": ["scripts/furaffinity.net/loader.js"],
+      "css": ["styles/furaffinity.net/style.css"],
+      "run_at": "document_start"
+    }
+  ]
+}

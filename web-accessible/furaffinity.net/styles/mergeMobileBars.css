@@ -1,0 +1,13 @@
+.mobile-notification-bar {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background: transparent !important;
+  border: none !important;
+  text-align: end;
+  height: 45px;
+  /* line-height: 45px; */
+  /* for the love of God, FurAffinity */
+  z-index: 1000000;
+  padding: 0 16px;
+}

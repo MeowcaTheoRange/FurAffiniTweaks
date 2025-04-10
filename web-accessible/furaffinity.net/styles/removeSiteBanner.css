@@ -1,0 +1,9 @@
+#header {
+  height: 0 !important;
+}
+#header > site-banner {
+  display: none !important;
+}
+userpage-nav-header {
+	margin-top: 8px !important;
+}

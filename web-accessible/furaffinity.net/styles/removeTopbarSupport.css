@@ -1,0 +1,6 @@
+#ddmenu > ul.navhideonmobile > .lileft:nth-child(5) {
+  display: none;
+}
+.mobile-navigation article.mobile-menu > .mobile-nav-content-container > :nth-child(1 of .nav-ac-container) {
+  display: none;
+}

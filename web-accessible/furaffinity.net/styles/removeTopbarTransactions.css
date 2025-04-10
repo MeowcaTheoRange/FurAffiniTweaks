@@ -1,0 +1,13 @@
+#ddmenu > ul.navhideonmobile > .lileft:nth-child(6),
+#ddmenu > ul.navhideonmobile > .lileft:nth-child(7) {
+  display: none;
+}
+#ddmenu > ul.navhideonmobile > :nth-child(1 of .submenu-trigger) .column > h3:nth-child(6),
+#ddmenu > ul.navhideonmobile > :nth-child(1 of .submenu-trigger) .column > a:nth-child(7),
+#ddmenu > ul.navhideonmobile > :nth-child(1 of .submenu-trigger) .column > a:nth-child(8) {
+  display: none;
+}
+.mobile-navigation article.mobile-menu > .mobile-nav-content-container > .aligncenter > :nth-child(5 of a),
+.mobile-navigation article.mobile-menu > .mobile-nav-content-container > .aligncenter > :nth-child(6 of a) {
+  display: none;
+}
