@@ -1,0 +1,3 @@
+- [ ] Disable Access To Minors Favourites
+- [ ] Automatic redirect system messages
+- [ ] Gamebanana top/sidebar (for some reason)
