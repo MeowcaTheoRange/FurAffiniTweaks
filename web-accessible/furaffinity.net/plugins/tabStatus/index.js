@@ -1,8 +1,4 @@
-const fatweaks = window.__fatweaks;
-fatweaks.titlebarStatus = {};
-let module = fatweaks.titlebarStatus;
-
-// -- //
+const module = __fatweaks.namespace("tabStatus");
 
 let prevTitle = document.title;
 module.refresh = function (element) {

@@ -1,3 +1,4 @@
 - [ ] Disable Access To Minors Favourites
 - [x] Automatic redirect system messages
 - [ ] Gamebanana top/sidebar (for some reason)
+- [ ] Defontify (replace Unicode "cool fonts" with actual text)

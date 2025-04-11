@@ -1,24 +1,4 @@
-const fatweaks = window.__fatweaks;
-fatweaks.smtt = {};
-let module = fatweaks.smtt;
-
-// let tooltip = fatweaks.tooltip;
-
 const domparser = new DOMParser();
-
-// function fail() {
-//   tooltip.hideTooltip();
-// }
-
-// document.addEventListener("mouseover", (e) => {
-//   if (e.target.tagName !== "IMG") return fail();
-//   if (e.target.dataset.tags == null) return fail();
-//   if (e.target.dataset.tags.length < 1)
-//     tooltip.showTooltip("[No tags]");
-//   else
-//     tooltip.showTooltip(e.target.dataset.tags);
-// });
-// document.addEventListener("mouseout", fail);
 
 let elements = document.querySelectorAll("figure");
 

@@ -1,8 +1,4 @@
-const fatweaks = window.__fatweaks;
-fatweaks.liveStatus = {};
-let module = fatweaks.liveStatus;
-
-let titlebarStatus = fatweaks.titlebarStatus;
+let tabStatus = __fatweaks.reference("tabStatus", false);
 
 const domparser = new DOMParser();
 let desktop_messagebar = document.querySelector(".message-bar-desktop");
@@ -21,7 +17,7 @@ async function updateliveStatus() {
   desktop_messagebar = new_desktop_messagebar;
   mobile_messagebar.replaceWith(new_mobile_messagebar);
   mobile_messagebar = new_mobile_messagebar;
-  if (titlebarStatus) titlebarStatus.refresh(desktop_messagebar);
+  if (tabStatus) tabStatus.refresh(desktop_messagebar);
 }
 
 setInterval(updateliveStatus, 10000);

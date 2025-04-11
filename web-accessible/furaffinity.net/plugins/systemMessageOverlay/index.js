@@ -1,9 +1,6 @@
-const fatweaks = window.__fatweaks;
-fatweaks.sysmoverlay = {};
-let module = fatweaks.sysmoverlay;
+const module = __fatweaks.namespace("systemMessageOverlay");
 
-let udatm = fatweaks.udatm;
-
+const udatm = __fatweaks.reference("unwatchDATM", false);
 
 const allATags = document.querySelectorAll("a");
 

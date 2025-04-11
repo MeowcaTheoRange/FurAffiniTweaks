@@ -1,6 +1,4 @@
-const fatweaks = window.__fatweaks;
-fatweaks.udatm = {};
-let module = fatweaks.udatm;
+const module = __fatweaks.namespace("unwatchDATM");
 
 const domparser = new DOMParser();
 

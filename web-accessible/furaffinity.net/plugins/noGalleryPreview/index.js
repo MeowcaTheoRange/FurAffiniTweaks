@@ -1,18 +1,3 @@
-const fatweaks = window.__fatweaks;
-fatweaks.ngp = {};
-let module = fatweaks.ngp;
-
-// Some code based on FurAffinity index.html
-
-`<figcaption>
-  <p>
-    <a href="/view/60536947/" title="Leo matero  *mate noise*">Leo matero  *mate noise*</a>
-  </p>
-  <p>
-    <i>by</i> <a href="/user/leomeh/" title="leomeh">leomeh</a>
-  </p>
-</figcaption>`
-
 const submdata_element = document.getElementById('js-submissionData');
 const submission_data = JSON.parse(submdata_element?.textContent ?? '{}');
 const uploads = document.querySelectorAll("img[data-tags]");
@@ -67,4 +52,4 @@ uploads.forEach((upload_elem) => {
   let figcaption = buildFigCaption(sid, sdata.title, sdata.lower, sdata.username);
 
   figure.appendChild(figcaption);
-})
+});
