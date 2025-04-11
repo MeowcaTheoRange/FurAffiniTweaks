@@ -1,0 +1,12 @@
+span.bbcode {
+  color: currentColor !important;
+}
+
+.bbcode_h1, .bbcode_h2, .bbcode_h3, .bbcode_h4, .bbcode_h5 {
+	color: white !important;
+  font-weight: bolder !important;
+}
+
+.user-submitted-links a {
+	color: white !important;
+}
