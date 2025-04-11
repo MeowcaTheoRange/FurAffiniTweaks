@@ -1,15 +1,19 @@
 const domparser = new DOMParser();
 
-let elements = document.querySelectorAll("figure");
+let uploads = document.querySelectorAll("img[data-tags]");
 
-elements.forEach((figure) => {
+uploads.forEach((upload_elem) => {
+  let link = upload_elem.parentElement;
+  let figure = upload_elem.closest('figure');
+
+  if (figure == null) return;
+
   let figure2 = figure.cloneNode(false);
   while (figure.hasChildNodes()) figure2.appendChild(figure.firstChild);
   figure.replaceWith(figure2);
   figure = figure2;
   let section = figure.parentElement;
 
-  let link = figure.querySelector("a");
   if (link == null) return;
   let fa_fig = figure.querySelector("figcaption");
   if (fa_fig) {
@@ -18,9 +22,7 @@ elements.forEach((figure) => {
     else figure.appendChild(fa_fig);
   }
 
-  let img = link.querySelector("img");
-
-  let tags = img.dataset.tags;
+  let tags = upload_elem.dataset.tags;
   let figcaption = document.createElement("figcaption");
   let p = document.createElement("p");
   p.innerHTML = tags || "[No tags]";
