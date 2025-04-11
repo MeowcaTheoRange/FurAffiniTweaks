@@ -12,4 +12,4 @@ module.refresh = function (element) {
 }
 
 let desktop_messagebar = document.querySelector(".message-bar-desktop");
-module.refresh(desktop_messagebar);
+if (desktop_messagebar) module.refresh(desktop_messagebar);
