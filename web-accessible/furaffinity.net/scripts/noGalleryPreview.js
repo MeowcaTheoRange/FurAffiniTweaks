@@ -2,46 +2,69 @@ const fatweaks = window.__fatweaks;
 fatweaks.ngp = {};
 let module = fatweaks.ngp;
 
-let tooltip = fatweaks.tooltip;
+// Some code based on FurAffinity index.html
 
-const domparser = new DOMParser();
+`<figcaption>
+  <p>
+    <a href="/view/60536947/" title="Leo matero  *mate noise*">Leo matero  *mate noise*</a>
+  </p>
+  <p>
+    <i>by</i> <a href="/user/leomeh/" title="leomeh">leomeh</a>
+  </p>
+</figcaption>`
 
-let gal_lat_cache = {};
+const submdata_element = document.getElementById('js-submissionData');
+const submission_data = JSON.parse(submdata_element?.textContent ?? '{}');
+const uploads = document.querySelectorAll("img[data-tags]");
 
-function fail() {
-  tooltip.hideTooltip();
-  return;
+function buildFigCaption(sid, title, username, displayName = username) {
+  let figcaption = document.createElement("figcaption");
+
+  let titleP = document.createElement("p");
+  figcaption.appendChild(titleP);
+  let authorP = document.createElement("p");
+  figcaption.appendChild(authorP);
+
+  let titleA = document.createElement("a");
+  titleA.href = `/view/${sid}/`;
+  titleA.title = title;
+  titleA.textContent = title;
+  titleP.appendChild(titleA);
+
+  let authorI = document.createElement("i");
+  authorI.textContent = "by";
+  authorP.appendChild(authorI);
+
+  let authorSpace = document.createTextNode(" ");
+  authorP.appendChild(authorSpace);
+
+  let authorA = document.createElement("a");
+  authorA.href = `/user/${username}/`;
+  authorA.title = displayName;
+  authorA.textContent = displayName;
+  authorP.appendChild(authorA);
+
+  return figcaption;
 }
 
-function tooltipable(element) {
-  let curSub = "";
-  element.addEventListener("mouseover", async (e) => {
-    if (e.target == element) return;
-    if (e.target.tagName !== "IMG") return;
-    tooltip.showTooltip("Loading...");
-    let link = e.target.parentElement;
-    if (link == null) return fail();
-    curSub = link.href;
-    if (gal_lat_cache[link.href] == null) {
-      let linkRequest = await fetch(link.href);
-      if (!linkRequest.ok) return fail();
-      let linkText = await linkRequest.text();
-      let dom = domparser.parseFromString(linkText, "text/html");
-      let title = dom.querySelector(".submission-title > h2 > p").textContent;
-      let author = dom.querySelector(".submission-id-sub-container .c-usernameBlockSimple__displayName").textContent;
-      gal_lat_cache[link.href] = `${title} by ${author}`;
-    }
-    if (curSub != link.href) return;
-    tooltip.showTooltip(gal_lat_cache[curSub]);
-  });
-  element.addEventListener("mouseout", async (e) => {
-    tooltip.hideTooltip();
-    curSub = "";
-  });
-}
+uploads.forEach((upload_elem) => {
+  let link = upload_elem.parentElement;
+  let figure = upload_elem.closest('figure');
 
-const galleryLatestS = document.querySelector("#gallery-latest-submissions");
-if (galleryLatestS) tooltipable(galleryLatestS);
+  if (figure == null) return;
 
-const galleryLatestF = document.querySelector("#gallery-latest-favorites");
-if (galleryLatestF) tooltipable(galleryLatestF);
+  if (figure.querySelector("figcaption")) return;
+
+  let gsection = upload_elem.closest(".nodesc");
+  if (gsection) gsection.classList.remove("nodesc");
+
+  // get image data
+  let sid = figure.id.slice(4);
+  let sdata = submission_data[sid];
+
+  if (sdata == null) return;
+
+  let figcaption = buildFigCaption(sid, sdata.title, sdata.lower, sdata.username);
+
+  figure.appendChild(figcaption);
+})
