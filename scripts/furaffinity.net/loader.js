@@ -43,7 +43,7 @@ async function onHeadLoaded() {
   injectStyle("removeSiteBanner.css", styleHolder);
   injectStyle("removeTopbarSupport.css", styleHolder);
   injectStyle("removeTopbarTransactions.css", styleHolder);
-  // injectStyle("showMeTheTags.css", styleHolder);
+  injectStyle("showMeTheTags.css", styleHolder);
 }
 onHeadLoaded();
 
@@ -73,7 +73,7 @@ async function onPageLoaded() {
   injectScript("liveStatus.js", scriptHolder);
 
   injectScript("nukeAllMessages.js", scriptHolder);
-  // injectScript("showMeTheTags.js", scriptHolder);
+  injectScript("showMeTheTags.js", scriptHolder);
 
   injectScript("unwatchDATM.js", scriptHolder);
   injectScript("systemMessageOverlay.js", scriptHolder);

@@ -23,7 +23,8 @@ const domparser = new DOMParser();
 let elements = document.querySelectorAll("figure");
 
 elements.forEach((figure) => {
-  let figure2 = figure.cloneNode(true);
+  let figure2 = figure.cloneNode(false);
+  while (figure.hasChildNodes()) figure2.appendChild(figure.firstChild);
   figure.replaceWith(figure2);
   figure = figure2;
   let section = figure.parentElement;
