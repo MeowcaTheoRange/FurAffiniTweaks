@@ -4,12 +4,12 @@ let module = fatweaks.udatm;
 
 const domparser = new DOMParser();
 
-async function checkDATMPage() {
-  const uslUnderage = document.querySelector(".user-submitted-links");
+module.checkDATMPage = async function (mypath = location.pathname) {
+  if (mypath == location.pathname && document.body.id != "pageid-redirect") return;
+  const uslUnderage = document.querySelector(".notice-message");
   if (uslUnderage == null) return;
   if (!uslUnderage.innerHTML.includes("underage users")) return;
-  let path = window.location.pathname;
-  let linkUser = path.split("/")[2];
+  let linkUser = mypath.split("/")[2];
 
   async function getUnwatchLink(page = 1) {
     console.log("searching Buddy List page", page);
@@ -51,10 +51,13 @@ async function checkDATMPage() {
 
   const linkOverride = uslUnderage.querySelector(".link-override");
   const proceedBtn = uslUnderage.querySelector(".proceed-btn-container");
+
+  linkOverride.querySelectorAll(".fatweaks-udatm").forEach(x => x.parentElement.removeChild(x));
+
   let previHTML = linkOverride.innerHTML;
 
-  if (!path.startsWith("/user/")) {
-    linkOverride.innerHTML += `<br /><i>To unwatch this user using FurAffiniTweaks, you must visit their userpage.</i>`;
+  if (!mypath.startsWith("/user/")) {
+    linkOverride.innerHTML += `<br class="fatweaks-udatm" /><i class="fatweaks-udatm">To unwatch this user using FurAffiniTweaks, you must visit their userpage.</i>`;
     return;
   }
 
@@ -74,13 +77,13 @@ async function checkDATMPage() {
   //   }
   //   previHTML = linkOverride.innerHTML;
 
-  linkOverride.innerHTML += `<br />
-  <i>FurAffiniTweaks: Finding unwatch link...</i>`;
+  linkOverride.innerHTML += `<br class="fatweaks-udatm" />
+  <i class="fatweaks-udatm">FurAffiniTweaks: Finding unwatch link...</i>`;
   let link = await getUnwatchLink();
   linkOverride.innerHTML = previHTML;
   if (link) {
-    proceedBtn.innerHTML = `<a class="button standard stop" href="${link}">Unwatch</a>` + proceedBtn.innerHTML;
+    proceedBtn.innerHTML = `<a class="fatweaks-udatm button standard stop" href="${link}">-Watch</a>` + proceedBtn.innerHTML;
   }
 }
 
-checkDATMPage();
+module.checkDATMPage();
