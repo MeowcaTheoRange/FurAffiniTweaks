@@ -7,7 +7,7 @@
     }
   },
   "version": "0.1",
-  "description": "FurAffinity site tweaks.",
+  "description": "Site tweaks for FurAffinity, making the site more tolerable overall.",
   "icons": {
     "48": "icons/fua-48.png",
     "96": "icons/fua-96.png"
