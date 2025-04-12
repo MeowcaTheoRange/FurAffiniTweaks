@@ -37,12 +37,12 @@ queuePlugin("allToggleablePlugins", 2);
 queuePlugin("tabStatus", 2);
 queuePlugin("liveStatus", 2);
 
-queuePlugin("unwatchDATM", 2);
-queuePlugin("systemMessageOverlay", 2);
-
 queuePlugin("nukeAllMessages", 2);
 queuePlugin("noGalleryPreview", 3);
 queuePlugin("showMeTheTags", 3);
+
+queuePlugin("unwatchDATM", 2);
+queuePlugin("systemMessageOverlay", 2);
 
 queuePlugin("faSettingsPage", 2);
 
