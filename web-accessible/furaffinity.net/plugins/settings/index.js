@@ -47,6 +47,8 @@ module.register = function ({
   template.boolean = function ({
     id,
     name: fieldName,
+    shortDescription,
+    authors,
     defaultValue
   }) {
     let lsnsname = `fatweaks_settings_${namespace}_${id}`;
@@ -59,6 +61,8 @@ module.register = function ({
     template.settings[id] = {
       type: "boolean",
       name: fieldName,
+      description: shortDescription,
+      authors,
       currentValue,
       defaultValue
     };
@@ -68,6 +72,8 @@ module.register = function ({
   template.number = function ({
     id,
     name: fieldName,
+    shortDescription,
+    authors,
     defaultValue
   }) {
     let lsnsname = `fatweaks_settings_${namespace}_${id}`;
@@ -80,6 +86,8 @@ module.register = function ({
     template.settings[id] = {
       type: "number",
       name: fieldName,
+      description: shortDescription,
+      authors,
       currentValue,
       defaultValue
     };
@@ -94,6 +102,8 @@ module.register = function ({
 module.registerSelfAsToggleable = function ({
   name,
   namespace,
+  shortDescription,
+  authors,
   defaultValue = false
 }) {
   let lsnsname = `fatweaks_settings_loader_${namespace}`;
@@ -107,6 +117,8 @@ module.registerSelfAsToggleable = function ({
   module.settingNamespaces.loader.settings[namespace] = {
     type: "boolean",
     name,
+    description: shortDescription,
+    authors,
     currentValue,
     defaultValue
   };

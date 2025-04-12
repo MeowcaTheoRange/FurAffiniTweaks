@@ -1,7 +1,7 @@
 const settings = __fatweaks.reference("settings");
 
 let mySettings = settings.register({
-  name: "Live Notification Status",
+  name: "Live Status",
   namespace: "liveStatus"
 });
 let updateTime = mySettings.number({

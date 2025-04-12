@@ -107,6 +107,8 @@ function createSettingsMenuItem({
   type,
   namespace,
   id,
+  description,
+  authors,
   name: fieldName,
   currentValue: value,
   defaultValue: def
@@ -116,7 +118,27 @@ function createSettingsMenuItem({
 
   let controlPanelItemDescription = document.createElement("div");
   controlPanelItemDescription.classList.add("control-panel-item-1");
-  controlPanelItemDescription.textContent = fieldName;
+
+  let controlPanelItemDescriptionText = document.createElement("p");
+  controlPanelItemDescriptionText.textContent = fieldName;
+  controlPanelItemDescriptionText.style.marginBottom = "0.25em";
+  controlPanelItemDescription.appendChild(controlPanelItemDescriptionText);
+
+  if (authors) {
+    let controlPanelItemDescriptionAuthors = document.createElement("p");
+    controlPanelItemDescriptionAuthors.textContent = "by " + authors.join(", ");
+    controlPanelItemDescriptionAuthors.style.fontSize = "0.8em";
+    controlPanelItemDescriptionAuthors.style.marginBottom = "0.5em";
+    controlPanelItemDescription.appendChild(controlPanelItemDescriptionAuthors);
+  }
+
+  if (description) {
+    let controlPanelItemDescriptionDesc = document.createElement("p");
+    controlPanelItemDescriptionDesc.textContent = description;
+    controlPanelItemDescriptionDesc.style.fontSize = "0.75em";
+    controlPanelItemDescription.appendChild(controlPanelItemDescriptionDesc);
+  }
+
   controlPanelItemContainer.appendChild(controlPanelItemDescription);
 
   controlPanelItemContainer.appendChild(
