@@ -1,5 +1,3 @@
-const module = __fatweaks.namespace("externalTargetBlank");
-
 const allATags = document.querySelectorAll("a");
 
 allATags.forEach((tag) => {
