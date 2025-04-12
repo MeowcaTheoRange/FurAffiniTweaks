@@ -10,6 +10,8 @@ let scriptHolder;
 // Queue plugins
 function queuePlugins(plugins) {
   plugins.forEach(([namespace, type]) => {
+    let ls_enabled = localStorage.getItem(`fatweaks_settings_loader_${namespace}`);
+    if (ls_enabled != null && ls_enabled != "true") return;
     console.debug(`Queued ${namespace}`);
 
     if (type & SCRIPT) {
