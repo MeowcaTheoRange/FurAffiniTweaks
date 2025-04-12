@@ -8,24 +8,24 @@ let styleHolder;
 let scriptHolder;
 
 // Queue plugins
-function queuePlugin(namespace, type) {
-  console.log(`Queued ${namespace}`);
+function queuePlugins(plugins) {
+  plugins.forEach(([namespace, type]) => {
+    console.debug(`Queued ${namespace}`);
 
-  if (type & SCRIPT) {
-    console.log("Has script");
-    const scriptUrl = browser.runtime.getURL(`web-accessible/furaffinity.net/plugins/${namespace}/index.js`);
-    queuedScripts.push(scriptUrl);
-  }
+    if (type & SCRIPT) {
+      const scriptUrl = browser.runtime.getURL(`web-accessible/furaffinity.net/plugins/${namespace}/index.js`);
+      queuedScripts.push(scriptUrl);
+    }
 
-  if (type & STYLE) {
-    console.log("Has style");
-    const styleUrl = browser.runtime.getURL(`web-accessible/furaffinity.net/plugins/${namespace}/style.css`);
-    queuedStylesheets.push(styleUrl);
-  }
+    if (type & STYLE) {
+      const styleUrl = browser.runtime.getURL(`web-accessible/furaffinity.net/plugins/${namespace}/style.css`);
+      queuedStylesheets.push(styleUrl);
+    }
+  });
 }
 
 // Plugin declarations
-[
+queuePlugins([
   ["mergeMobileBars", STYLE],
   ["mobileFixMessagesButtons", STYLE],
   ["noBBCodeColor", STYLE],
@@ -37,15 +37,17 @@ function queuePlugin(namespace, type) {
   ["removeTopbarTransactions", STYLE],
 
   ["modules", SCRIPT],
+
   ["tabStatus", SCRIPT],
   ["liveStatus", SCRIPT],
+
   ["unwatchDATM", SCRIPT],
   ["systemMessageOverlay", SCRIPT],
-  ["nukeAllMessages", SCRIPT],
 
+  ["nukeAllMessages", SCRIPT],
   ["noGalleryPreview", STYLE | SCRIPT],
   ["showMeTheTags", STYLE | SCRIPT]
-].forEach(([name, type]) => queuePlugin(name, type));
+]);
 
 // Style injection
 function createStyleHolder(root) {
@@ -55,42 +57,12 @@ function createStyleHolder(root) {
   return container;
 }
 
-//**
-// function injectStyle(src, parent = document.head) {
-//   const link = document.createElement("link");
-//   link.href = src;
-//   link.rel = "preload stylesheet"; // Note: this is invalid, updated function below
-//   link.setAttribute("blocking", "render");
-//   parent.appendChild(link);
-// }
-//*/
-
 function injectStyle(src, parent = document.head) {
-  const supportsPreload = document.createElement("link").relList.supports?.("preload");
+  const link = document.createElement("link");
+  link.rel = "stylesheet";
+  link.href = src;
 
-  if (supportsPreload) {
-    const link = document.createElement("link");
-    link.rel = "preload";
-    link.href = src;
-    link.as = "style";
-    link.setAttribute("blocking", "render");
-
-    const swapRel = () => {
-      link.rel = "stylesheet";
-      link.removeAttribute("as");
-    };
-
-    link.onload = swapRel;
-    link.onerror = swapRel;
-
-    parent.appendChild(link);
-  } else {
-    const fallback = document.createElement("link");
-    fallback.rel = "stylesheet";
-    fallback.href = src;
-    fallback.setAttribute("blocking", "render");
-    parent.appendChild(fallback);
-  }
+  parent.appendChild(link);
 }
 
 async function onHeadLoaded() {
