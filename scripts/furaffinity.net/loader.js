@@ -59,8 +59,7 @@ function createStyleHolder(element) {
 function injectStyle(src, parent = document.head) {
   const link = document.createElement("link");
   link.href = src;
-  link.rel = "preload stylesheet";
-  link.setAttribute('blocking', 'render');
+  link.rel = "stylesheet";
   parent.appendChild(link);
 }
 
