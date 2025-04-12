@@ -1,6 +1,18 @@
 const settings = __fatweaks.reference("settings");
 
 settings.registerSelfAsToggleable({
+  name: "Ability to directly unwatch users with Disable Access to Minors enabled",
+  namespace: "unwatchDATM",
+  defaultValue: false
+});
+
+settings.registerSelfAsToggleable({
+  name: "Allow nuking all messages",
+  namespace: "nukeAllMessages",
+  defaultValue: true
+});
+
+settings.registerSelfAsToggleable({
   name: "External links open in a new tab",
   namespace: "externalTargetBlank",
   defaultValue: true
@@ -25,12 +37,6 @@ settings.registerSelfAsToggleable({
 });
 
 settings.registerSelfAsToggleable({
-  name: "User Control Panel buttons in headers on mobile",
-  namespace: "mobileFixMessagesButtons",
-  defaultValue: false
-});
-
-settings.registerSelfAsToggleable({
   name: "No BBCode Colors",
   namespace: "noBBCodeColor",
   defaultValue: false
@@ -49,9 +55,15 @@ settings.registerSelfAsToggleable({
 });
 
 settings.registerSelfAsToggleable({
-  name: "Allow nuking all messages",
-  namespace: "nukeAllMessages",
+  name: "Notification Status in Tab Text",
+  namespace: "tabStatus",
   defaultValue: true
+});
+
+settings.registerSelfAsToggleable({
+  name: "Overlay System Messages over previous page",
+  namespace: "systemMessageOverlay",
+  defaultValue: false
 });
 
 settings.registerSelfAsToggleable({
@@ -85,25 +97,13 @@ settings.registerSelfAsToggleable({
 });
 
 settings.registerSelfAsToggleable({
-  name: "Notification Status in Tab Text",
-  namespace: "tabStatus",
-  defaultValue: true
-});
-
-settings.registerSelfAsToggleable({
-  name: "Overlay System Messages over previous page",
-  namespace: "systemMessageOverlay",
+  name: "Section buttons in headers on mobile",
+  namespace: "mobileFixMessagesButtons",
   defaultValue: false
 });
 
 settings.registerSelfAsToggleable({
   name: "Show Me The Tags",
   namespace: "showMeTheTags",
-  defaultValue: false
-});
-
-settings.registerSelfAsToggleable({
-  name: "Ability to directly unwatch users with Disable Access to Minors enabled",
-  namespace: "unwatchDATM",
   defaultValue: false
 });
