@@ -1,83 +1,89 @@
+const STYLE = 0b01;
+const SCRIPT = 0b10;
+
+const queuedStylesheets = [];
+const queuedScripts = [];
+
 let styleHolder;
 let scriptHolder;
 
-let queuedStylesheets = [];
-let queuedScripts = [];
+// Queue plugins
+function queuePlugins(plugins) {
+  plugins.forEach(([namespace, type]) => {
+    console.debug(`Queued ${namespace}`);
 
-// Plugin functions
+    if (type & SCRIPT) {
+      const scriptUrl = browser.runtime.getURL(`web-accessible/furaffinity.net/plugins/${namespace}/index.js`);
+      queuedScripts.push(scriptUrl);
+    }
 
-function queuePlugin(namespace, type) {
-  let ls_enabled = localStorage.getItem(`fatweaks_settings_loader_${namespace}`);
-  if (ls_enabled != null && ls_enabled != "true") return;
-  if ((type & 0b10) > 0) {
-    let script_url = browser.runtime.getURL(`web-accessible/furaffinity.net/plugins/${namespace}/index.js`);
-    queuedScripts.push(script_url);
-  }
-  if ((type & 0b01) > 0) {
-    let styles_url = browser.runtime.getURL(`web-accessible/furaffinity.net/plugins/${namespace}/style.css`);
-    queuedStylesheets.push(styles_url);
-  }
+    if (type & STYLE) {
+      const styleUrl = browser.runtime.getURL(`web-accessible/furaffinity.net/plugins/${namespace}/style.css`);
+      queuedStylesheets.push(styleUrl);
+    }
+  });
 }
 
-queuePlugin("fixOverflowingDropdowns", 1);
-queuePlugin("mergeMobileBars", 1);
-queuePlugin("mobileFixMessagesButtons", 1);
-queuePlugin("noBBCodeColor", 1);
-queuePlugin("noMoreNews", 1);
-queuePlugin("removeCookiePopup", 1);
-queuePlugin("removeFooterLinks", 1);
-queuePlugin("removeSiteBanner", 1);
-queuePlugin("removeTopbarSupport", 1);
-queuePlugin("removeTopbarTransactions", 1);
+// Plugin declarations
+queuePlugins([
+  ["fixOverflowingDropdowns", STYLE],
+  ["mergeMobileBars", STYLE],
+  ["mobileFixMessagesButtons", STYLE],
+  ["noBBCodeColor", STYLE],
+  ["noMoreNews", STYLE],
+  ["removeCookiePopup", STYLE],
+  ["removeFooterLinks", STYLE],
+  ["removeSiteBanner", STYLE],
+  ["removeTopbarSupport", STYLE],
+  ["removeTopbarTransactions", STYLE],
 
-queuePlugin("modules", 2);
-queuePlugin("settings", 2);
-queuePlugin("allToggleablePlugins", 2);
+  ["modules", SCRIPT],
+  ["settings", SCRIPT],
+  ["allToggleablePlugins", SCRIPT],
 
-queuePlugin("tabStatus", 2);
-queuePlugin("liveStatus", 2);
+  ["tabStatus", SCRIPT],
+  ["liveStatus", SCRIPT],
 
-queuePlugin("nukeAllMessages", 2);
-queuePlugin("noGalleryPreview", 3);
-queuePlugin("showMeTheTags", 3);
+  ["nukeAllMessages", SCRIPT],
+  ["noGalleryPreview", STYLE | SCRIPT],
+  ["showMeTheTags", STYLE | SCRIPT]
 
-queuePlugin("unwatchDATM", 2);
-queuePlugin("systemMessageOverlay", 2);
+  ["unwatchDATM", SCRIPT],
+  ["systemMessageOverlay", SCRIPT],
 
-queuePlugin("faSettingsPage", 2);
+  ["faSettingsPage", SCRIPT],
+]);
 
-
-// Style functions
-
-function createStyleHolder(element) {
-  let container = document.createElement("div");
+// Style injection
+function createStyleHolder(root) {
+  const container = document.createElement("div");
   container.id = "fatweaks-style-holder";
-  element.appendChild(container);
+  root.appendChild(container);
   return container;
 }
 
 function injectStyle(src, parent = document.head) {
   const link = document.createElement("link");
-  link.href = src;
   link.rel = "stylesheet";
+  link.href = src;
   parent.appendChild(link);
 }
 
 async function onHeadLoaded() {
   styleHolder = createStyleHolder(document.documentElement);
-  queuedStylesheets.forEach(x => injectStyle(x, styleHolder));
+  queuedStylesheets.forEach(src => injectStyle(src, styleHolder));
 }
 
 onHeadLoaded();
 
-// Script functions
-
-function createScriptHolder(element) {
-  let container = document.createElement("div");
+// Script injection
+function createScriptHolder(root) {
+  const container = document.createElement("div");
   container.id = "fatweaks-script-holder";
-  element.appendChild(container);
+  root.appendChild(container);
   return container;
 }
+
 function injectScript(src, parent = document.body) {
   const script = document.createElement("script");
   script.src = src;
@@ -85,9 +91,10 @@ function injectScript(src, parent = document.body) {
   script.defer = true;
   parent.appendChild(script);
 }
+
 async function onPageLoaded() {
   scriptHolder = createScriptHolder(document.body);
-  queuedScripts.forEach(x => injectScript(x, scriptHolder));
+  queuedScripts.forEach(src => injectScript(src, scriptHolder));
 }
 
 document.addEventListener("DOMContentLoaded", () => {
