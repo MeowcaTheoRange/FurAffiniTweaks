@@ -7,19 +7,19 @@ let queuedScripts = [];
 // Plugin functions
 
 function queuePlugin(namespace, type) {
-  console.log(`Queued ${namespace}`);
+  let ls_enabled = localStorage.getItem(`fatweaks_settings_loader_${namespace}`);
+  if (ls_enabled != null && ls_enabled != "true") return;
   if ((type & 0b10) > 0) {
-    console.log("Has script");
     let script_url = browser.runtime.getURL(`web-accessible/furaffinity.net/plugins/${namespace}/index.js`);
     queuedScripts.push(script_url);
   }
   if ((type & 0b01) > 0) {
-    console.log("Has style");
     let styles_url = browser.runtime.getURL(`web-accessible/furaffinity.net/plugins/${namespace}/style.css`);
     queuedStylesheets.push(styles_url);
   }
 }
 
+queuePlugin("fixOverflowingDropdowns", 1);
 queuePlugin("mergeMobileBars", 1);
 queuePlugin("mobileFixMessagesButtons", 1);
 queuePlugin("noBBCodeColor", 1);
@@ -31,6 +31,8 @@ queuePlugin("removeTopbarSupport", 1);
 queuePlugin("removeTopbarTransactions", 1);
 
 queuePlugin("modules", 2);
+queuePlugin("settings", 2);
+queuePlugin("allToggleablePlugins", 2);
 
 queuePlugin("tabStatus", 2);
 queuePlugin("liveStatus", 2);
@@ -41,6 +43,9 @@ queuePlugin("systemMessageOverlay", 2);
 queuePlugin("nukeAllMessages", 2);
 queuePlugin("noGalleryPreview", 3);
 queuePlugin("showMeTheTags", 3);
+
+queuePlugin("faSettingsPage", 2);
+
 
 // Style functions
 

@@ -1,14 +1,14 @@
-form#messages-form .align-options-body {
+.align-options-body {
   display: none !important;
 }
 
-form#messages-form .align-options-header {
+.align-options-header {
   display: unset !important;
 }
 
-form#messages-form .align-options-header button {
+.align-options-header button {
   line-height: 32px !important;
 }
-form#messages-form .align-options-header button.nuke {
+.align-options-header button.nuke {
   height: 36px !important;
 }
