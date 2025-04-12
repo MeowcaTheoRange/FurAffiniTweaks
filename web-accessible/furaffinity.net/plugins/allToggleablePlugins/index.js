@@ -1,6 +1,12 @@
 const settings = __fatweaks.reference("settings");
 
 settings.registerSelfAsToggleable({
+  name: "External links open in a new tab",
+  namespace: "externalTargetBlank",
+  defaultValue: true
+});
+
+settings.registerSelfAsToggleable({
   name: "Fix Overflowing Dropdowns",
   namespace: "fixOverflowingDropdowns",
   defaultValue: true

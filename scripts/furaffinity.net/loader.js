@@ -44,6 +44,8 @@ queuePlugin("showMeTheTags", 3);
 queuePlugin("unwatchDATM", 2);
 queuePlugin("systemMessageOverlay", 2);
 
+queuePlugin("externalTargetBlank", 2);
+
 queuePlugin("faSettingsPage", 2);
 
 
