@@ -26,6 +26,7 @@ function queuePlugins(plugins) {
 
 // Plugin declarations
 queuePlugins([
+  ["fixOverflowingDropdowns", STYLE],
   ["mergeMobileBars", STYLE],
   ["mobileFixMessagesButtons", STYLE],
   ["noBBCodeColor", STYLE],
@@ -37,16 +38,20 @@ queuePlugins([
   ["removeTopbarTransactions", STYLE],
 
   ["modules", SCRIPT],
+  ["settings", SCRIPT],
+  ["allToggleablePlugins", SCRIPT],
 
   ["tabStatus", SCRIPT],
   ["liveStatus", SCRIPT],
 
-  ["unwatchDATM", SCRIPT],
-  ["systemMessageOverlay", SCRIPT],
-
   ["nukeAllMessages", SCRIPT],
   ["noGalleryPreview", STYLE | SCRIPT],
   ["showMeTheTags", STYLE | SCRIPT]
+
+  ["unwatchDATM", SCRIPT],
+  ["systemMessageOverlay", SCRIPT],
+
+  ["faSettingsPage", SCRIPT],
 ]);
 
 // Style injection
