@@ -1,6 +1,17 @@
 const module = __fatweaks.namespace("systemMessageOverlay");
 
 const udatm = __fatweaks.reference("unwatchDATM", false);
+const settings = __fatweaks.reference("settings");
+
+let mySettings = settings.register({
+  name: "System Message Overlay",
+  namespace: "systemMessageOverlay"
+});
+let reloadOnClose = mySettings.boolean({
+  id: "reloadOnClose",
+  name: "Reload page when system message is closed",
+  defaultValue: true
+});
 
 const allATags = document.querySelectorAll("a");
 
@@ -11,6 +22,7 @@ function fail(href) {
 }
 
 module.closeSysMessage = function (e) {
+  if (reloadOnClose) return location.reload();
   let page = e.target.closest("#standardpage");
   page.parentElement.removeChild(page);
 }
@@ -39,7 +51,7 @@ allATags.forEach((tag) => {
       section.style.maxWidth = "768px";
       section.style.boxShadow = "0 4px 8px #0008";
       let redirbutton = section.querySelector("a.button");
-      redirbutton.parentElement.innerHTML = `<button class="button standard stop" onclick="window.__fatweaks.sysmoverlay.closeSysMessage(event);">Close</button>`;
+      redirbutton.parentElement.innerHTML = `<button class="button standard stop" onclick="window.__fatweaks.modules.systemMessageOverlay.closeSysMessage(event)">Close</button>`;
 
       document.body.appendChild(thispage);
 

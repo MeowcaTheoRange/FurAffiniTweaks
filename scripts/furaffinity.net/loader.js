@@ -66,7 +66,6 @@ function injectStyle(src, parent = document.head) {
   const link = document.createElement("link");
   link.rel = "stylesheet";
   link.href = src;
-
   parent.appendChild(link);
 }
 

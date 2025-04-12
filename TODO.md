@@ -2,3 +2,8 @@
 - [x] Automatic redirect system messages
 - [ ] Gamebanana top/sidebar (for some reason)
 - [ ] Defontify (replace Unicode "cool fonts" with actual text)
+- [ ] Alt Text (plugin that uses 3y3 encoding to hide alt text in submission descriptions)
+- [ ] Custom User CSS (plugin that uses 3y3 encoding to hide CSS definitions in user page summaries)
+- [ ] https://www.furaffinity.net/view/38095884/
+- [ ] https://www.furaffinity.net/view/45128573/
+- [ ] https://www.furaffinity.net/view/39779598/, but for liveStatus

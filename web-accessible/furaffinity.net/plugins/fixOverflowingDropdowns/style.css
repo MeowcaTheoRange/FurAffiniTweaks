@@ -1,0 +1,5 @@
+#ddmenu .dropdown {
+  max-height: calc(100vh - 56px);
+  overflow-y: auto;
+  overflow-x: hidden;
+}

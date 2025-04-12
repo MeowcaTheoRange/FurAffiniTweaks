@@ -12,11 +12,6 @@
     "48": "icons/fua-48.png",
     "96": "icons/fua-96.png"
   },
-  "browser_action": {
-    "default_icon": "icons/fua-32.png",
-    "default_title": "FurAffiniTweaks",
-    "default_popup": "pages/popup/index.html"
-  },
   "web_accessible_resources": [
     {
       "resources": ["web-accessible/furaffinity.net/*"],

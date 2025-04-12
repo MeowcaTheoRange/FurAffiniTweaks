@@ -1,4 +1,16 @@
-let tabStatus = __fatweaks.reference("tabStatus", false);
+const settings = __fatweaks.reference("settings");
+
+let mySettings = settings.register({
+  name: "Live Notification Status",
+  namespace: "liveStatus"
+});
+let updateTime = mySettings.number({
+  id: "updateTime",
+  name: "How often (in seconds) to update status",
+  defaultValue: 10
+});
+
+const tabStatus = __fatweaks.reference("tabStatus", false);
 
 const domparser = new DOMParser();
 let desktop_messagebar = document.querySelector(".message-bar-desktop");
@@ -20,4 +32,4 @@ async function updateliveStatus() {
   if (tabStatus) tabStatus.refresh(desktop_messagebar);
 }
 
-setInterval(updateliveStatus, 10000);
+setInterval(updateliveStatus, updateTime * 1000);
