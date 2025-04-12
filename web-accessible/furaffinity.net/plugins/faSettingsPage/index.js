@@ -1,16 +1,5 @@
 const settings = __fatweaks.reference("settings");
-
-function craftCategory(upper) {
-  let headerElement = document.createElement("h3");
-  headerElement.innerHTML = upper ? "FURAFFINITWEAKS" : "FurAffiniTweaks";
-
-  let aElement = document.createElement("a");
-  aElement.innerHTML = "Plugin Settings";
-  aElement.href = "#";
-  aElement.onclick = openSettingsPage;
-
-  return [headerElement, aElement];
-}
+const dropdownManager = __fatweaks.reference("dropdownManager");
 
 function createSettingsMenuHull() {
   let container = document.createElement("div");
@@ -137,27 +126,9 @@ function createSettingsMenuItem({
   return controlPanelItemContainer;
 }
 
-function createSettingsDropdownMenu() {
-  let settingsButton = document.querySelector("li.submenu-trigger:last-of-type");
-  if (settingsButton == null) return;
-  let dropdownColumn = settingsButton.querySelector(".dropdown-right .column");
-  if (dropdownColumn == null) return;
-  let category = craftCategory();
-  dropdownColumn.prepend(...category);
-}
-function createSettingsDropdownMenuMobile() {
-  let settingsButton = document.querySelector(".mobile-nav-content-container div.nav-ac-container:last-of-type");
-  if (settingsButton == null) return;
-  let dropdownColumn = settingsButton.querySelector(".nav-ac-content.nav-ac-content-dropdown");
-  if (dropdownColumn == null) return;
-  let category = craftCategory(true);
-  dropdownColumn.prepend(...category);
-}
-
 let hull;
 function start() {
-  createSettingsDropdownMenu();
-  createSettingsDropdownMenuMobile();
+  dropdownManager.createDropdownEntry("FurAffiniTweaks Settings", "#", openSettingsPage);
 
   hull = createSettingsMenuHull();
   let hullbody = hull.querySelector(".section-body");

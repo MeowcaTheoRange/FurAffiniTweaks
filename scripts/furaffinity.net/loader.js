@@ -33,6 +33,7 @@ queuePlugin("removeTopbarTransactions", 1);
 queuePlugin("modules", 2);
 queuePlugin("settings", 2);
 queuePlugin("allToggleablePlugins", 2);
+queuePlugin("dropdownManager", 2);
 
 queuePlugin("tabStatus", 2);
 queuePlugin("liveStatus", 2);
