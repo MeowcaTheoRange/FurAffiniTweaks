@@ -40,16 +40,19 @@ queuePlugins([
   ["modules", SCRIPT],
   ["settings", SCRIPT],
   ["allToggleablePlugins", SCRIPT],
+  ["dropdownManager", SCRIPT],
 
   ["tabStatus", SCRIPT],
   ["liveStatus", SCRIPT],
 
   ["nukeAllMessages", SCRIPT],
   ["noGalleryPreview", STYLE | SCRIPT],
-  ["showMeTheTags", STYLE | SCRIPT]
+  ["showMeTheTags", STYLE | SCRIPT],
 
   ["unwatchDATM", SCRIPT],
   ["systemMessageOverlay", SCRIPT],
+
+  ["externalTargetBlank", SCRIPT],
 
   ["faSettingsPage", SCRIPT],
 ]);
