@@ -56,8 +56,9 @@ module.register = function ({
     if (currentValue == null) {
       localStorage.setItem(lsnsname, defaultValue);
       currentValue = defaultValue;
+    } else {
+      currentValue = currentValue == "true";
     }
-    currentValue = currentValue == "true";
     template.settings[id] = {
       type: "boolean",
       name: fieldName,
@@ -81,8 +82,9 @@ module.register = function ({
     if (currentValue == null) {
       localStorage.setItem(lsnsname, defaultValue);
       currentValue = defaultValue;
+    } else {
+      currentValue = +currentValue;
     }
-    currentValue = +currentValue;
     template.settings[id] = {
       type: "number",
       name: fieldName,
@@ -111,8 +113,9 @@ module.registerSelfAsToggleable = function ({
   if (currentValue == null) {
     localStorage.setItem(lsnsname, defaultValue);
     currentValue = defaultValue;
+  } else {
+    currentValue = currentValue == "true";
   }
-  currentValue = currentValue == "true";
 
   module.settingNamespaces.loader.settings[namespace] = {
     type: "boolean",
