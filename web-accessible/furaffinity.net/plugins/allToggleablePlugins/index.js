@@ -1,6 +1,14 @@
 const settings = __fatweaks.reference("settings");
 
 settings.registerSelfAsToggleable({
+  name: "Does Anyone Know What Those Symbols Next To People's Usernames Mean?!",
+  shortDescription: "Replace the ~@-!∞ symbols next to usernames with something more descriptive",
+  authors: ["MeowcaTheoRange"],
+  namespace: "doesAnyoneKnowWhatThoseSymbolsNextToPeoplesUsernamesMean",
+  defaultValue: false
+});
+
+settings.registerSelfAsToggleable({
   name: "External target=\"_blank\"",
   shortDescription: "Make external (non-FurAffinity) links open in a new tab",
   authors: ["MeowcaTheoRange"],

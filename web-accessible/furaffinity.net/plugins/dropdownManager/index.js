@@ -37,6 +37,7 @@ let headerMobile;
 
 function appendToFATweaksHeader(headerElement = headerDesktop, element) {
   let parent = headerElement.parentNode;
+  if (parent == null) return;
   if (headerElement.nextSibling)
     parent.insertBefore(element, headerElement.nextSibling);
   else parent.appendChild(element);

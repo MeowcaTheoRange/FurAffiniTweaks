@@ -17,6 +17,8 @@ let desktop_messagebar = document.querySelector(".message-bar-desktop");
 let mobile_messagebar = document.querySelector(".mobile-notification-bar");
 
 async function updateliveStatus() {
+  if (desktop_messagebar == null && mobile_messagebar == null) return;
+
   // Loading BLM page because it's a static page
   // Also because Black Lives Matter 🖤🤎
   let linkRequest = await fetch(window.location.origin + "/blm/");
