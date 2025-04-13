@@ -20,12 +20,12 @@ function queuePlugins(plugins) {
     console.debug(`Queued ${namespace}`);
 
     if (type & SCRIPT) {
-      const scriptUrl = browser.runtime.getURL(`web-accessible/furaffinity.net/plugins/${namespace}/index.js`);
+      const scriptUrl = chrome.runtime.getURL(`web-accessible/furaffinity.net/plugins/${namespace}/index.js`);
       queuedScripts.push(scriptUrl);
     }
 
     if (type & STYLE) {
-      const styleUrl = browser.runtime.getURL(`web-accessible/furaffinity.net/plugins/${namespace}/style.css`);
+      const styleUrl = chrome.runtime.getURL(`web-accessible/furaffinity.net/plugins/${namespace}/style.css`);
       queuedStylesheets.push(styleUrl);
     }
   });
