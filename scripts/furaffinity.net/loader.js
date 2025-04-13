@@ -9,9 +9,12 @@ let scriptHolder;
 
 // Queue plugins
 function queuePlugins(plugins) {
-  plugins.forEach(([namespace, type]) => {
+  plugins.forEach(([namespace, type, force = false, onByDefault = false]) => {
     let ls_enabled = localStorage.getItem(`fatweaks_settings_loader_${namespace}`);
-    if (ls_enabled != null && ls_enabled != "true") return;
+    if (!force) {
+      if (ls_enabled == null && !onByDefault) return;
+      if (ls_enabled != null && ls_enabled != "true") return;
+    }
     console.debug(`Queued ${namespace}`);
 
     if (type & SCRIPT) {
@@ -28,7 +31,7 @@ function queuePlugins(plugins) {
 
 // Plugin declarations
 queuePlugins([
-  ["fixOverflowingDropdowns", STYLE],
+  ["fixOverflowingDropdowns", STYLE, false, true],
   ["mergeMobileBars", STYLE],
   ["mobileFixMessagesButtons", STYLE],
   ["noBBCodeColor", STYLE],
@@ -39,24 +42,25 @@ queuePlugins([
   ["removeTopbarSupport", STYLE],
   ["removeTopbarTransactions", STYLE],
 
-  ["modules", SCRIPT],
-  ["settings", SCRIPT],
-  ["allToggleablePlugins", SCRIPT],
-  ["dropdownManager", SCRIPT],
+  ["modules", SCRIPT, true],
+  ["settings", SCRIPT, true],
+  ["allToggleablePlugins", SCRIPT, true],
+  ["dropdownManager", SCRIPT, true],
 
-  ["tabStatus", SCRIPT],
+  ["tabStatus", SCRIPT, false, true],
   ["liveStatus", SCRIPT],
 
-  ["nukeAllMessages", SCRIPT],
+  ["doesAnyoneKnowWhatThoseSymbolsNextToPeoplesUsernamesMean", SCRIPT],
+  ["nukeAllMessages", SCRIPT, false, true],
   ["noGalleryPreview", STYLE | SCRIPT],
   ["showMeTheTags", STYLE | SCRIPT],
 
   ["unwatchDATM", SCRIPT],
   ["systemMessageOverlay", SCRIPT],
 
-  ["externalTargetBlank", SCRIPT],
+  ["externalTargetBlank", SCRIPT, false, true],
 
-  ["faSettingsPage", SCRIPT],
+  ["faSettingsPage", SCRIPT, true],
 ]);
 
 // Style injection
