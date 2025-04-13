@@ -33,7 +33,7 @@ allATags.forEach((tag) => {
   let hrefURL;
   try {
     hrefURL = new URL(tag.href);
-  } catch (e) { }
+  } catch (e) { return }
   if (hrefURL.origin == location.origin)
     tag.addEventListener("click", async (e) => {
       e.preventDefault();
