@@ -1,153 +1,159 @@
 const settings = __fatweaks.reference("settings");
 
-settings.registerSelfAsToggleable({
+let mySettings = settings.register({
+  name: "Toggle Plugins",
+  namespace: "loader"
+})
+
+mySettings.boolean({
   name: "Does Anyone Know What Those Symbols Next To People's Usernames Mean?!",
   shortDescription: "Replace the ~@-!∞ symbols next to usernames with something more descriptive",
   authors: ["MeowcaTheoRange"],
-  namespace: "doesAnyoneKnowWhatThoseSymbolsNextToPeoplesUsernamesMean",
+  id: "doesAnyoneKnowWhatThoseSymbolsNextToPeoplesUsernamesMean",
   defaultValue: false
 });
 
-settings.registerSelfAsToggleable({
+mySettings.boolean({
   name: "External target=\"_blank\"",
   shortDescription: "Make external (non-FurAffinity) links open in a new tab",
   authors: ["MeowcaTheoRange"],
-  namespace: "externalTargetBlank",
+  id: "externalTargetBlank",
   defaultValue: true
 });
 
-settings.registerSelfAsToggleable({
+mySettings.boolean({
   name: "Fix Overflowing Dropdowns",
   shortDescription: "Makes all topbar dropdowns scroll when they're bigger than the screen",
   authors: ["MeowcaTheoRange"],
-  namespace: "fixOverflowingDropdowns",
+  id: "fixOverflowingDropdowns",
   defaultValue: true
 });
 
-settings.registerSelfAsToggleable({
+mySettings.boolean({
   name: "Fix Section Buttons",
   shortDescription: "Keeps the buttons in sections in the header on mobile",
   authors: ["MeowcaTheoRange"],
-  namespace: "mobileFixMessagesButtons",
+  id: "mobileFixMessagesButtons",
   defaultValue: false
 });
 
-settings.registerSelfAsToggleable({
+mySettings.boolean({
   name: "Live Status",
   shortDescription: "Updates the top-corner notification status every so often",
   authors: ["MeowcaTheoRange"],
+  id: "liveStatus",
   namespace: "liveStatus",
   defaultValue: false
 });
 
-settings.registerSelfAsToggleable({
+mySettings.boolean({
   name: "Merge Mobile Bars",
   shortDescription: "Merges the two topbars on mobile to become one unified topbar, similar to desktop",
   authors: ["MeowcaTheoRange"],
-  namespace: "mergeMobileBars",
+  id: "mergeMobileBars",
   defaultValue: false
 });
 
-settings.registerSelfAsToggleable({
+mySettings.boolean({
   name: "No BBCode Colors",
   shortDescription: "Removes color from BBCode elements, like [color], [a], and [h1-6]",
   authors: ["MeowcaTheoRange"],
-  namespace: "noBBCodeColor",
+  id: "noBBCodeColor",
   defaultValue: false
 });
 
-settings.registerSelfAsToggleable({
+mySettings.boolean({
   name: "No Gallery Preview",
   shortDescription: "Removes the \"preview\" part of a userpage's Gallery and Favourites section, opting for a more traditional display instead",
   authors: ["MeowcaTheoRange"],
-  namespace: "noGalleryPreview",
+  id: "noGalleryPreview",
   defaultValue: false
 });
 
-settings.registerSelfAsToggleable({
+mySettings.boolean({
   name: "No More News",
   shortDescription: "Removes any news below the topbar",
   authors: ["MeowcaTheoRange"],
-  namespace: "noMoreNews",
+  id: "noMoreNews",
   defaultValue: false
 });
 
-settings.registerSelfAsToggleable({
+mySettings.boolean({
   name: "Nuke All Messages",
   shortDescription: "Allow nuking all messages in the Other Messages menu",
   authors: ["MeowcaTheoRange"],
-  namespace: "nukeAllMessages",
+  id: "nukeAllMessages",
   defaultValue: true
 });
 
-settings.registerSelfAsToggleable({
+mySettings.boolean({
   name: "Remove Cookie Popup",
   shortDescription: "Removes the cookie popup at the bottom of the site",
   authors: ["MeowcaTheoRange"],
-  namespace: "removeCookiePopup",
+  id: "removeCookiePopup",
   defaultValue: false
 });
 
-settings.registerSelfAsToggleable({
+mySettings.boolean({
   name: "Remove Footer Links",
   shortDescription: "Removes the links in the footer of the site",
   authors: ["MeowcaTheoRange"],
-  namespace: "removeFooterLinks",
+  id: "removeFooterLinks",
   defaultValue: false
 });
 
-settings.registerSelfAsToggleable({
+mySettings.boolean({
   name: "Remove Site Banner",
   shortDescription: "Removes the banner at the top of the site",
   authors: ["MeowcaTheoRange"],
-  namespace: "removeSiteBanner",
+  id: "removeSiteBanner",
   defaultValue: false
 });
 
-settings.registerSelfAsToggleable({
+mySettings.boolean({
   name: "Remove Topbar Support",
   shortDescription: "Removes the \"Support\" dropdown from the topbar",
   authors: ["MeowcaTheoRange"],
-  namespace: "removeTopbarSupport",
+  id: "removeTopbarSupport",
   defaultValue: false
 });
 
-settings.registerSelfAsToggleable({
+mySettings.boolean({
   name: "Remove Topbar Transactions",
   shortDescription: "Removes the FA+ and Shop buttons from the topbar",
   authors: ["MeowcaTheoRange"],
-  namespace: "removeTopbarTransactions",
+  id: "removeTopbarTransactions",
   defaultValue: false
 });
 
-settings.registerSelfAsToggleable({
+mySettings.boolean({
   name: "Show Me The Tags",
   shortDescription: "Puts tags on submission indexes",
   authors: ["MeowcaTheoRange"],
-  namespace: "showMeTheTags",
+  id: "showMeTheTags",
   defaultValue: false
 });
 
-settings.registerSelfAsToggleable({
+mySettings.boolean({
   name: "System Message Overlay",
   shortDescription: "Overlay System Messages over the site, instead of going to another page for it",
   authors: ["MeowcaTheoRange"],
-  namespace: "systemMessageOverlay",
+  id: "systemMessageOverlay",
   defaultValue: false
 });
 
-settings.registerSelfAsToggleable({
+mySettings.boolean({
   name: "Tab Status",
   shortDescription: "Brings the top-corner notification status to the tab's title",
   authors: ["MeowcaTheoRange"],
-  namespace: "tabStatus",
+  id: "tabStatus",
   defaultValue: true
 });
 
-settings.registerSelfAsToggleable({
+mySettings.boolean({
   name: "Unwatch DATM",
   shortDescription: "Adds the ability to directly unwatch users with Disable Access to Minors enabled",
   authors: ["MeowcaTheoRange"],
-  namespace: "unwatchDATM",
+  id: "unwatchDATM",
   defaultValue: false
 });

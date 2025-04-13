@@ -1,5 +1,7 @@
-const STYLE = 0b01;
-const SCRIPT = 0b10;
+const STYLE = 0b0001;
+const SCRIPT = 0b0010;
+const DEFAULT_PLUGIN = 0b0100;
+const BASE_PLUGIN = 0b1000;
 
 const queuedStylesheets = [];
 const queuedScripts = [];
@@ -9,10 +11,10 @@ let scriptHolder;
 
 // Queue plugins
 function queuePlugins(plugins) {
-  plugins.forEach(([namespace, type, force = false, onByDefault = false]) => {
+  plugins.forEach(([namespace, type]) => {
     let ls_enabled = localStorage.getItem(`fatweaks_settings_loader_${namespace}`);
-    if (!force) {
-      if (ls_enabled == null && !onByDefault) return;
+    if (!(type & BASE_PLUGIN)) {
+      if (ls_enabled == null && !(type & DEFAULT_PLUGIN)) return;
       if (ls_enabled != null && ls_enabled != "true") return;
     }
     console.debug(`Queued ${namespace}`);
@@ -31,7 +33,8 @@ function queuePlugins(plugins) {
 
 // Plugin declarations
 queuePlugins([
-  ["fixOverflowingDropdowns", STYLE, false, true],
+  // Styles are here to be loaded as fast as possible
+  ["fixOverflowingDropdowns", STYLE | DEFAULT_PLUGIN],
   ["mergeMobileBars", STYLE],
   ["mobileFixMessagesButtons", STYLE],
   ["noBBCodeColor", STYLE],
@@ -42,25 +45,29 @@ queuePlugins([
   ["removeTopbarSupport", STYLE],
   ["removeTopbarTransactions", STYLE],
 
-  ["modules", SCRIPT, true],
-  ["settings", SCRIPT, true],
-  ["allToggleablePlugins", SCRIPT, true],
-  ["dropdownManager", SCRIPT, true],
+  // Base stuff, most plugins need at least one of these
+  ["modules", SCRIPT | BASE_PLUGIN],
+  ["events", SCRIPT | BASE_PLUGIN],
+  ["settings", SCRIPT | BASE_PLUGIN],
+  ["allToggleablePlugins", SCRIPT | BASE_PLUGIN],
+  ["dropdownManager", SCRIPT | BASE_PLUGIN],
+  ["faSettingsPage", SCRIPT | BASE_PLUGIN],
 
-  ["tabStatus", SCRIPT, false, true],
-  ["liveStatus", SCRIPT],
-
+  // Plugins here
   ["doesAnyoneKnowWhatThoseSymbolsNextToPeoplesUsernamesMean", SCRIPT],
-  ["nukeAllMessages", SCRIPT, false, true],
+  ["nukeAllMessages", SCRIPT | DEFAULT_PLUGIN],
+  ["tabStatus", SCRIPT | DEFAULT_PLUGIN],
+  ["liveStatus", SCRIPT],
+  ["unwatchDATM", SCRIPT],
+  ["systemMessageOverlay", SCRIPT],
+  ["externalTargetBlank", SCRIPT | DEFAULT_PLUGIN],
+
+  ["liveStatusAlert", STYLE | SCRIPT],
   ["noGalleryPreview", STYLE | SCRIPT],
   ["showMeTheTags", STYLE | SCRIPT],
 
-  ["unwatchDATM", SCRIPT],
-  ["systemMessageOverlay", SCRIPT],
-
-  ["externalTargetBlank", SCRIPT, false, true],
-
-  ["faSettingsPage", SCRIPT, true],
+  // Runs when all plugins load, unlatches events
+  ["allPluginsLoaded", SCRIPT | DEFAULT_PLUGIN],
 ]);
 
 // Style injection

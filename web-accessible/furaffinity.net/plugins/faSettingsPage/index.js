@@ -1,4 +1,5 @@
 const settings = __fatweaks.reference("settings");
+const events = __fatweaks.reference("events");
 const dropdownManager = __fatweaks.reference("dropdownManager");
 
 function createSettingsMenuHull() {
@@ -118,7 +119,7 @@ function createSettingsMenuItem({
   id,
   description,
   authors,
-  name: fieldName,
+  fieldName,
   currentValue: value,
   defaultValue: def
 }) {
@@ -164,16 +165,14 @@ function start() {
   hull = createSettingsMenuHull();
   let hullbody = hull.querySelector(".section-body");
 
-  settings.getNSes().forEach((namespace) => {
-    let head = createSettingsMenuHeader(settings.getNSName(namespace));
+  events.listenToEvent("settings", "namespaceRegistered", ({ name, namespace }) => {
+    let head = createSettingsMenuHeader(name);
     hullbody.appendChild(head);
-    settings.getNSSettings(namespace).forEach((setting) => {
-      let settingData = settings.getNSSetting(namespace, setting);
-      settingData.id = setting;
-      settingData.namespace = namespace;
-      let item = createSettingsMenuItem(settingData);
-      hullbody.appendChild(item);
-    });
+  });
+
+  events.listenToEvent("settings", "namespaceFieldRegistered", (settingData) => {
+    let item = createSettingsMenuItem(settingData);
+    hullbody.appendChild(item);
   });
 
   document.body.appendChild(hull);

@@ -1,10 +1,8 @@
 const module = __fatweaks.namespace("settings");
 
+const events = __fatweaks.reference("events");
+
 module.settingNamespaces = {
-  loader: {
-    name: "Toggle Plugins",
-    settings: {}
-  }
 };
 
 module.getNSes = function () {
@@ -52,12 +50,26 @@ module.register = function ({
   }) {
     let lsnsname = `fatweaks_settings_${namespace}_${id}`;
     let currentValue = localStorage.getItem(lsnsname);
+
     if (currentValue == null) {
       localStorage.setItem(lsnsname, defaultValue);
       currentValue = defaultValue;
     } else {
       currentValue = currentValue == "true";
     }
+
+    events.pushEvent("settings", "namespaceFieldRegistered", {
+      name,
+      namespace,
+      type: "boolean",
+      id,
+      fieldName,
+      description: shortDescription,
+      authors,
+      currentValue,
+      defaultValue
+    });
+
     template.settings[id] = {
       type: "boolean",
       name: fieldName,
@@ -66,6 +78,7 @@ module.register = function ({
       currentValue,
       defaultValue
     };
+
     return currentValue;
   };
 
@@ -78,12 +91,26 @@ module.register = function ({
   }) {
     let lsnsname = `fatweaks_settings_${namespace}_${id}`;
     let currentValue = localStorage.getItem(lsnsname);
+
     if (currentValue == null) {
       localStorage.setItem(lsnsname, defaultValue);
       currentValue = defaultValue;
     } else {
       currentValue = +currentValue;
     }
+
+    events.pushEvent("settings", "namespaceFieldRegistered", {
+      name,
+      namespace,
+      type: "number",
+      id,
+      fieldName,
+      description: shortDescription,
+      authors,
+      currentValue,
+      defaultValue
+    });
+
     template.settings[id] = {
       type: "number",
       name: fieldName,
@@ -92,36 +119,16 @@ module.register = function ({
       currentValue,
       defaultValue
     };
+
     return currentValue;
   };
+
+  events.pushEvent("settings", "namespaceRegistered", {
+    name,
+    namespace,
+  });
 
   module.settingNamespaces[namespace] = template;
 
   return template;
-}
-
-module.registerSelfAsToggleable = function ({
-  name,
-  namespace,
-  shortDescription,
-  authors,
-  defaultValue = false
-}) {
-  let lsnsname = `fatweaks_settings_loader_${namespace}`;
-  let currentValue = localStorage.getItem(lsnsname);
-  if (currentValue == null) {
-    localStorage.setItem(lsnsname, defaultValue);
-    currentValue = defaultValue;
-  } else {
-    currentValue = currentValue == "true";
-  }
-
-  module.settingNamespaces.loader.settings[namespace] = {
-    type: "boolean",
-    name,
-    description: shortDescription,
-    authors,
-    currentValue,
-    defaultValue
-  };
 }

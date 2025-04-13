@@ -1,7 +1,7 @@
 const module = __fatweaks.namespace("systemMessageOverlay");
 
-const udatm = __fatweaks.reference("unwatchDATM", false);
 const settings = __fatweaks.reference("settings");
+const events = __fatweaks.reference("events");
 
 let mySettings = settings.register({
   name: "System Message Overlay",
@@ -25,6 +25,10 @@ module.closeSysMessage = function (e) {
   if (reloadOnClose) return location.reload();
   let page = e.target.closest("#standardpage");
   page.parentElement.removeChild(page);
+
+  events.pushEvent("systemMessageOverlay", "hidden", {
+    element: page
+  });
 }
 
 allATags.forEach((tag) => {
@@ -58,6 +62,9 @@ allATags.forEach((tag) => {
 
       document.body.appendChild(thispage);
 
-      if (udatm) udatm.checkDATMPage(hrefURL.pathname);
+      events.pushEvent("systemMessageOverlay", "displayed", {
+        element: thispage,
+        href: hrefURL
+      });
     });
 });

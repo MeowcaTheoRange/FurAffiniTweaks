@@ -1,5 +1,7 @@
 const module = __fatweaks.namespace("unwatchDATM");
 
+const events = __fatweaks.reference("events");
+
 const domparser = new DOMParser();
 
 module.checkDATMPage = async function (mypath = location.pathname) {
@@ -85,3 +87,5 @@ module.checkDATMPage = async function (mypath = location.pathname) {
 }
 
 module.checkDATMPage();
+
+events.listenToEvent("systemMessageOverlay", "displayed", ({ el, href }) => module.checkDATMPage(href.pathname));
