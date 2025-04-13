@@ -38,6 +38,15 @@ function createSettingsMenuHull() {
 
   let sectionBody = document.createElement("div");
   sectionBody.classList.add("section-body");
+  sectionBody.innerHTML = `<div class="align-options-body section_controls">
+  <button class="standard">Save</button>
+  <button class="standard stop">Close</button>
+</div>`;
+  sectionBody.querySelector("button.standard").addEventListener("click", () => {
+    settings.saveNSes();
+    location.reload();
+  });
+  sectionBody.querySelector("button.stop").addEventListener("click", closeSettingsPage);
   sectionBody.style.height = "calc(100% - 42px)";
   sectionBody.style.boxSizing = "border-box";
   sectionBody.style.overflowY = "auto";
