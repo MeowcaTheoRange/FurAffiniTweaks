@@ -42,7 +42,14 @@ mySettings.boolean({
   shortDescription: "Updates the top-corner notification status every so often",
   authors: ["MeowcaTheoRange"],
   id: "liveStatus",
-  namespace: "liveStatus",
+  defaultValue: false
+});
+
+mySettings.boolean({
+  name: "Live Status Alert",
+  shortDescription: "Blip and flash for Live Status. Also an example of how plugins can extend off of each other with the new event system.",
+  authors: ["MeowcaTheoRange"],
+  id: "liveStatusAlert",
   defaultValue: false
 });
 

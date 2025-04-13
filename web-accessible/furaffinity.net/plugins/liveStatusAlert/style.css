@@ -1,0 +1,8 @@
+#ddmenu li a, #ddmenu li a:link, .mobile-notification-bar a {
+  transition: color 0.25s !important;
+}
+
+#ddmenu li.flash a, #ddmenu li.flash a:link, .mobile-notification-bar.flash a {
+  transition: none !important;
+  color: yellow !important;
+}

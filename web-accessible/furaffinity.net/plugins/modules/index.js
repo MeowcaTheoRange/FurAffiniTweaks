@@ -13,4 +13,10 @@ fatweaks.namespace = function (id) {
   return fatweaks.modules[id];
 }
 
+let mySrc = import.meta.url;
+fatweaks.assetURL = function (namespace, pathname) {
+  let srcURL = new URL(mySrc);
+  return `${srcURL.origin}/web-accessible/furaffinity.net/plugins/${namespace}/${pathname}`;
+}
+
 fatweaks.modules = {};
