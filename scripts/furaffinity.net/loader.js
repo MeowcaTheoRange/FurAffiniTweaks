@@ -58,13 +58,14 @@ queuePlugins([
   ["nukeAllMessages", SCRIPT | DEFAULT_PLUGIN],
   ["tabStatus", SCRIPT | DEFAULT_PLUGIN],
   ["liveStatus", SCRIPT],
-  ["unwatchDATM", SCRIPT],
-  ["systemMessageOverlay", SCRIPT],
   ["externalTargetBlank", SCRIPT | DEFAULT_PLUGIN],
 
   ["liveStatusAlert", STYLE | SCRIPT],
   ["noGalleryPreview", STYLE | SCRIPT],
   ["showMeTheTags", STYLE | SCRIPT],
+
+  ["systemMessageOverlay", SCRIPT],
+  ["unwatchDATM", SCRIPT],
 
   // Runs when all plugins load, unlatches events
   ["allPluginsLoaded", SCRIPT | DEFAULT_PLUGIN],
