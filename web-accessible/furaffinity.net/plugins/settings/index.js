@@ -22,7 +22,6 @@ module.getNSSetting = function (namespace, id) {
 
 module.setNSSetting = function (namespace, id, value) {
   module.settingNamespaces[namespace].settings[id].currentValue = value;
-  console.log(module.getNSSetting(namespace, id));
 }
 
 module.saveNSes = function () {
