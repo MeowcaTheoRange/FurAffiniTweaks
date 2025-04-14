@@ -1,6 +1,6 @@
 # Contributing to FurAffiniTweaks
 
-> [!IMPORTANT] Hello from @MeowcaTheoRange
+> [!NOTE]
 > Welcome to FurAffiniTweaks! I'm so happy you're considering contributing to this project.
 >
 > All contributions of any type are welcomed and the time you spend helping this project will not be forgotten.
