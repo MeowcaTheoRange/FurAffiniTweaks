@@ -4,24 +4,33 @@ const DEFAULT_PLUGIN = 0b0100;
 const BASE_PLUGIN = 0b1000;
 
 const queuedStylesheets = [];
-const queuedScripts = [];
+const baseScripts = [];
+const otherScripts = [];
 
 let styleHolder;
 let scriptHolder;
 
+window.__fatweaks = {};
+
 // Queue plugins
 function queuePlugins(plugins) {
   plugins.forEach(([namespace, type]) => {
-    let ls_enabled = localStorage.getItem(`fatweaks_settings_loader_${namespace}`);
-    if (!(type & BASE_PLUGIN)) {
-      if (ls_enabled == null && !(type & DEFAULT_PLUGIN)) return;
-      if (ls_enabled != null && ls_enabled != "true") return;
-    }
+    const enabled = localStorage.getItem(`fatweaks_settings_loader_${namespace}`);
+    const shouldLoad =
+      (type & BASE_PLUGIN) || // always load base
+      (enabled === "true") || // explicitly enabled
+      (enabled === null && (type & DEFAULT_PLUGIN)); // default on
+
+    if (!shouldLoad) return;
     console.debug(`Queued ${namespace}`);
 
     if (type & SCRIPT) {
       const scriptUrl = chrome.runtime.getURL(`web-accessible/furaffinity.net/plugins/${namespace}/index.js`);
-      queuedScripts.push(scriptUrl);
+      if (type & BASE_PLUGIN) {
+        baseScripts.push(scriptUrl);
+      } else {
+        otherScripts.push(scriptUrl);
+      }
     }
 
     if (type & STYLE) {
@@ -71,6 +80,7 @@ queuePlugins([
   ["allPluginsLoaded", SCRIPT | DEFAULT_PLUGIN],
 ]);
 
+
 // Style injection
 function createStyleHolder(root) {
   const container = document.createElement("div");
@@ -93,7 +103,8 @@ async function onHeadLoaded() {
 
 onHeadLoaded();
 
-// Script injection
+
+// Sequential script injection
 function createScriptHolder(root) {
   const container = document.createElement("div");
   container.id = "fatweaks-script-holder";
@@ -101,21 +112,37 @@ function createScriptHolder(root) {
   return container;
 }
 
-function injectScript(src, parent = document.body) {
-  const script = document.createElement("script");
-  script.src = src;
-  script.type = "module";
-  script.defer = true;
-  parent.appendChild(script);
+function injectScriptSequentially(src, parent) {
+  return new Promise((resolve, reject) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.type = "module";
+    script.onload = resolve;
+    script.onerror = reject;
+    parent.appendChild(script);
+  });
 }
 
 async function onPageLoaded() {
   scriptHolder = createScriptHolder(document.body);
-  queuedScripts.forEach(src => injectScript(src, scriptHolder));
+
+  for (const src of baseScripts) {
+    try {
+      await injectScriptSequentially(src, scriptHolder);
+    } catch (err) {
+      console.error(`Failed to load base script: ${src}`, err);
+    }
+  }
+
+  for (const src of otherScripts) {
+    try {
+      await injectScriptSequentially(src, scriptHolder);
+    } catch (err) {
+      console.error(`Failed to load plugin: ${src}`, err);
+    }
+  }
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   onPageLoaded();
-  styleHolder.parentNode.appendChild(styleHolder);
-  scriptHolder.parentNode.appendChild(scriptHolder);
 });
