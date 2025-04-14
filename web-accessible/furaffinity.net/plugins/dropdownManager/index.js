@@ -1,3 +1,7 @@
+/**
+ * The system that FurAffiniTweaks uses to create entries in the Settings dropdown. This is one of the base modules that can't be unloaded.
+ * @typedef {Module} DropdownManagerModule
+ */
 const module = __fatweaks.namespace("dropdownManager");
 
 function craftCategoryHeader(upper = false) {
@@ -53,6 +57,17 @@ function start() {
 
 start();
 
+/**
+ * Gets all the registered namespaces.
+ * @alias DropdownManagerModule.createDropdownEntry
+ * @param {string} name - The title of the dropdown.
+ * @param {string} href - Where the dropdown entry will go when clicked.
+ * @param {function (MouseEvent) | null} onclick - The event the dropdown entry will fire when clicked. Can override.
+ * @example
+ * const dropdownManager = __fatweaks.reference("dropdownManager");
+ * 
+ * dropdownManager.createDropdownEntry("Turn into Duck", "#", module.transformSiteToDuck);
+ */
 module.createDropdownEntry = function (name = "", href = "#", onclick) {
   let entryDesktop = craftCategoryEntry(name, href, onclick);
   let entryMobile = craftCategoryEntry(name, href, onclick);

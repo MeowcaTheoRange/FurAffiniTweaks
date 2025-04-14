@@ -1,3 +1,7 @@
+/**
+ * System Message Overlay by MeowcaTheoRange
+ * @typedef {Object} SystemMessageOverlayPlugin
+ */
 const module = __fatweaks.namespace("systemMessageOverlay");
 
 const settings = __fatweaks.reference("settings");
@@ -21,6 +25,11 @@ function fail(href) {
   window.location.assign(href);
 }
 
+/**
+ * Closes the system message that contains the clicked element.
+ * @alias SystemMessageOverlayPlugin.closeSysMessage
+ * @param {MouseEvent} e
+ */
 module.closeSysMessage = function (e) {
   if (reloadOnClose) return location.reload();
   let page = e.target.closest("#standardpage");
@@ -68,3 +77,18 @@ allATags.forEach((tag) => {
       });
     });
 });
+
+/**
+ * Fires when System Message Overlay displays a System Message.
+ * @event SystemMessageOverlayPlugin.displayed
+ * @type {object}
+ * @property {Element} element - The container for the floating System Message.
+ * @property {URL} hrefURL - The URL where the System Message came from.
+ */
+
+/**
+ * Fires when System Message Overlay closes a System Message.
+ * @event SystemMessageOverlayPlugin.hidden
+ * @type {object}
+ * @property {Element} element - The container for the floating System Message.
+ */

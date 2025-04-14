@@ -1,3 +1,8 @@
+/**
+ * Live Status by MeowcaTheoRange
+ * @typedef {Object} LiveStatusPlugin
+ */
+
 const settings = __fatweaks.reference("settings");
 const events = __fatweaks.reference("events");
 
@@ -46,3 +51,21 @@ async function updateliveStatus() {
 }
 
 setInterval(updateliveStatus, updateTime * 1000);
+
+/**
+ * Fires when Live Status updates the notification text.
+ * @event LiveStatusPlugin.updated
+ * @type {object}
+ * @property {string} notifs - The notification text as a string (e.x. `"2S 3F 4W 5J"`).
+ * @property {Element} desktop_element - The desktop notification text element.
+ * @property {Element} mobile_element - The mobile notification text element.
+ */
+
+/**
+ * Fires when the notification status has changed its state.
+ * @event LiveStatusPlugin.changed
+ * @type {object}
+ * @property {string} notifs - The notification text as a string (e.x. `"2S 3F 4W 5J"`).
+ * @property {Element} desktop_element - The desktop notification text element.
+ * @property {Element} mobile_element - The mobile notification text element.
+ */
