@@ -145,4 +145,6 @@ async function onPageLoaded() {
 
 document.addEventListener("DOMContentLoaded", () => {
   onPageLoaded();
+  styleHolder.parentNode.appendChild(styleHolder);
+  scriptHolder.parentNode.appendChild(scriptHolder);
 });
