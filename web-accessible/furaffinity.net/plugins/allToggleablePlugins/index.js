@@ -164,3 +164,11 @@ mySettings.boolean({
   id: "unwatchDATM",
   defaultValue: false
 });
+
+mySettings.boolean({
+  name: "UwU",
+  shortDescription: "Rewrites words to sound smol and adorbs~!",
+  authors: ["Bexxi"],
+  id: "uwu",
+  defaultValue: false
+});

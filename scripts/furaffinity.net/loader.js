@@ -76,6 +76,8 @@ queuePlugins([
   ["systemMessageOverlay", SCRIPT],
   ["unwatchDATM", SCRIPT],
 
+  ["uwu", SCRIPT],
+
   // Runs when all plugins load, unlatches events
   ["allPluginsLoaded", SCRIPT | DEFAULT_PLUGIN],
 ]);
