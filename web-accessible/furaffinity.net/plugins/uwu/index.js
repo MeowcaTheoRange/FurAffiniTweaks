@@ -86,7 +86,7 @@ function uwuifyNodeText(node) {
 			parent.closest("#fatweaks_faSettingsPage_settingsPage") ||
 			parent.closest(".tags") ||
 			parent.closest(".popup_date") ||
-            parent.closest(".display-name-text") ||
+			parent.closest(".display-name-text") ||
 			parent.closest(".message-bar-desktop") ||
 			parent.closest(".mobile-notification-bar") ||
 			(location.pathname.startsWith("/controls/") &&
