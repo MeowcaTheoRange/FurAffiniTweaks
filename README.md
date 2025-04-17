@@ -93,3 +93,7 @@ Brings the top-corner notification status to the tab's title
 ### Unwatch DATM<br /><small><small>by MeowcaTheoRange</small></small>
 
 Adds the ability to directly unwatch users with Disable Access to Minors enabled
+
+### UwU<br /><small><small>by Bexxi</small></small>
+
+Rewrites words to sound smol and adorbs~!
