@@ -7,7 +7,7 @@
   },
   "scripts": {
     "furaffinity.net:jsdoc": "node node/furaffinity.net/docs.js",
-    "web-ext-build": "web-ext build -o"
+    "web-ext-build": "web-ext build"
   },
   "author": "MeowcaTheoRange and contributors",
   "license": "MIT",
