@@ -142,6 +142,14 @@ mySettings.boolean({
 });
 
 mySettings.boolean({
+  name: "Resize Textareas",
+  shortDescription: "Makes any textareas on the site vertically resizable.",
+  authors: ["MeowcaTheoRange"],
+  id: "resizeTextareaBoxes",
+  defaultValue: true
+});
+
+mySettings.boolean({
   name: "Show Me The Tags",
   shortDescription: "Puts tags on submission indexes",
   authors: ["MeowcaTheoRange"],
