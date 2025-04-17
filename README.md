@@ -82,6 +82,10 @@ Removes the "Support" dropdown from the topbar
 
 Removes the FA+ and Shop buttons from the topbar
 
+### Resize Textareas<br /><small><small>by MeowcaTheoRange</small></small>
+
+Makes any textareas on the site vertically resizable.
+
 ### Show Me The Tags<br /><small><small>by MeowcaTheoRange</small></small>
 
 Puts tags on submission indexes
