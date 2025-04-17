@@ -52,6 +52,7 @@ queuePlugins([
   ["removeCookiePopup", STYLE],
   ["removeFooterLinks", STYLE],
   ["removeSiteBanner", STYLE],
+  ["resizeTextareaBoxes", STYLE | DEFAULT_PLUGIN],
   ["removeTopbarSupport", STYLE],
   ["removeTopbarTransactions", STYLE],
 
