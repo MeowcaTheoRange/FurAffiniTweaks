@@ -46,11 +46,17 @@ References a plugin as a module in order to use its resources.
 
 **Example**  
 ```js
-const example = __fatweaks.reference("example");// quack or elseexample.transformSiteToDuck();
+const example = __fatweaks.reference("example");
+
+// quack or else
+example.transformSiteToDuck();
 ```
 **Example**  
 ```js
-const example = __fatweaks.reference("example", false);// quack if user wants me toif (example) example.transformSiteToDuck();
+const example = __fatweaks.reference("example", false);
+
+// quack if user wants me to
+if (example) example.transformSiteToDuck();
 ```
 <a name="__fatweaks.namespace"></a>
 
@@ -65,7 +71,9 @@ Modulizes a plugin, so its resources can be used by other plugins.
 
 **Example**  
 ```js
-const module = __fatweaks.namespace("example");module.transformSiteToDuck = function() {...};
+const module = __fatweaks.namespace("example");
+
+module.transformSiteToDuck = function() {...};
 ```
 <a name="__fatweaks.assetURL"></a>
 
@@ -81,7 +89,8 @@ Returns a URL to an asset found under a namespace.
 
 **Example**  
 ```js
-let duck = __fatweaks.assetURL("example", "duck.jpg");document.body.innerHTML = `<img src="${duck}" />`;
+let duck = __fatweaks.assetURL("example", "duck.jpg");
+document.body.innerHTML = `<img src="${duck}" />`;
 ```
 <a name="Module"></a>
 

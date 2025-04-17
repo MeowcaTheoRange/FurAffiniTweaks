@@ -59,7 +59,7 @@ function start() {
 start();
 
 /**
- * Gets all the registered namespaces.
+ * Creates a dropdown entry in the "Settings" menu, on both mobile and desktop.
  * @alias DropdownManagerModule.createDropdownEntry
  * @param {string} name - The title of the dropdown.
  * @param {string} href - Where the dropdown entry will go when clicked.

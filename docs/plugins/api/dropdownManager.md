@@ -7,7 +7,7 @@ The system that FurAffiniTweaks uses to create entries in the Settings dropdown.
 <a name="DropdownManagerModule.createDropdownEntry"></a>
 
 ### DropdownManagerModule.createDropdownEntry(name, href, onclick)
-Gets all the registered namespaces.
+Creates a dropdown entry in the "Settings" menu, on both mobile and desktop.
 
 **Kind**: static method of [<code>DropdownManagerModule</code>](#DropdownManagerModule)  
 
@@ -19,5 +19,7 @@ Gets all the registered namespaces.
 
 **Example**  
 ```js
-const dropdownManager = __fatweaks.reference("dropdownManager");dropdownManager.createDropdownEntry("Turn into Duck", "#", module.transformSiteToDuck);
+const dropdownManager = __fatweaks.reference("dropdownManager");
+
+dropdownManager.createDropdownEntry("Turn into Duck", "#", module.transformSiteToDuck);
 ```
