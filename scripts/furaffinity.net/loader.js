@@ -44,6 +44,7 @@ function queuePlugins(plugins) {
 queuePlugins([
   // Styles are here to be loaded as fast as possible
   ["fixOverflowingDropdowns", STYLE | DEFAULT_PLUGIN],
+  ["iDontCareIfYoureAnAdminYoureFuckingUpMySchema", STYLE],
   ["mergeMobileBars", STYLE],
   ["mobileFixMessagesButtons", STYLE],
   ["noBBCodeColor", STYLE],

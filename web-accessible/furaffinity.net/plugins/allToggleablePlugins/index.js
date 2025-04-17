@@ -38,6 +38,14 @@ mySettings.boolean({
 });
 
 mySettings.boolean({
+  name: "\"I don't care if you're an admin! You're fucking up my schema!\"",
+  shortDescription: "Removes the blue tint from admin comments.",
+  authors: ["MeowcaTheoRange"],
+  id: "iDontCareIfYoureAnAdminYoureFuckingUpMySchema",
+  defaultValue: false
+});
+
+mySettings.boolean({
   name: "Live Status",
   shortDescription: "Updates the top-corner notification status every so often",
   authors: ["MeowcaTheoRange"],
