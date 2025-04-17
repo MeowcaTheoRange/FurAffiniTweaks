@@ -17,7 +17,7 @@ let reloadOnClose = mySettings.boolean({
   defaultValue: true
 });
 
-const allATags = document.querySelectorAll("a");
+const allATags = document.querySelectorAll("a:not(.fatweaks-generated)");
 
 const domparser = new DOMParser();
 

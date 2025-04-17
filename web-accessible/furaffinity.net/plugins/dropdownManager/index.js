@@ -13,6 +13,7 @@ function craftCategoryHeader(upper = false) {
 
 function craftCategoryEntry(name, href, onclick) {
   let aElement = document.createElement("a");
+  aElement.classList.add("fatweaks-generated");
   aElement.textContent = name;
   aElement.href = href;
   if (onclick) aElement.addEventListener("click", onclick);
