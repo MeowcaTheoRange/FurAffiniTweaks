@@ -1,3 +1,15 @@
+const settings = __fatweaks.reference("settings");
+
+let mySettings = settings.register({
+  name: "UwU",
+  namespace: "uwu"
+});
+let addTilde = mySettings.boolean({
+  id: "addTilde",
+  name: "Add tilde to word if no replacement is found",
+  defaultValue: true
+});
+
 const uwuDictionary = {
 	you: "u",
 	You: "U",
@@ -8,7 +20,7 @@ const uwuDictionary = {
 	friend: "fwend",
 	very: "bery",
 	little: "wittwe",
-	cute: "kawaii~",
+  cute: "kawaii",
 	thank: "fank",
 	sorry: "sowwy",
 	please: "pwease",
@@ -21,10 +33,11 @@ const uwuDictionary = {
 
 function softenWord(word) {
 	if (word.length <= 3) return word;
-	if (word.endsWith("ing")) return word.slice(0, -3) + "in~";
-	if (word.endsWith("ed")) return word.slice(0, -2) + "d~";
+  if (word.endsWith("ing")) return word.slice(0, -3) + "in";
+  if (word.endsWith("ed")) return word.slice(0, -2) + "d";
 	if (word.endsWith("s")) return word + "ies";
-	return word + "~";
+  if (addTilde) return word + "~";
+  return word;
 }
 
 function uwuifyWordWithPunct(word) {
