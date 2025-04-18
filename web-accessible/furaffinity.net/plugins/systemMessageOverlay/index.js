@@ -43,6 +43,7 @@ module.closeSysMessage = function (e) {
 allATags.forEach((tag) => {
   if (tag.href == null) return;
   if (tag.href.length < 1) return;
+  if (tag.classList.contains("replyto_link")) return;
   let hrefURL;
   try {
     hrefURL = new URL(tag.href);
