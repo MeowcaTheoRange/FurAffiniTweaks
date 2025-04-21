@@ -102,6 +102,10 @@ Brings the top-corner notification status to the tab's title
 
 Adds the ability to directly unwatch users with Disable Access to Minors enabled
 
+### Unaccountability<br /><small><small>by MeowcaTheoRange</small></small>
+
+Removes the aliases arrow next to users with Display Names enabled
+
 ### UwU<br /><small><small>by Bexxi</small></small>
 
 Rewrites words to sound smol and adorbs~!
