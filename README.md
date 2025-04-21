@@ -30,6 +30,10 @@ Makes all topbar dropdowns scroll when they're bigger than the screen
 
 Keeps the buttons in sections in the header on mobile
 
+### FurAffinAmp<br /><small><small>by MeowcaTheoRange</small></small>
+
+Shows a Webamp window on FurAffinity, where you can play and save music that you find on the site.
+
 ### "I don't care if you're an admin! You're fucking up my schema!"<br /><small><small>by MeowcaTheoRange</small></small>
 
 Removes the blue tint from admin comments.

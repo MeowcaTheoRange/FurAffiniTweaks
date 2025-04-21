@@ -1,0 +1,19 @@
+#webamp #main-window {
+  display: unset !important;
+  min-height: unset !important;
+}
+
+#webamp-context-menu hr {
+  margin: 0 !important;
+}
+
+#fatweaks-furAffinAmp-webampContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 99999999;
+}
+
+.audio-player {
+  display: none;
+}
