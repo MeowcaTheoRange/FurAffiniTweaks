@@ -10,7 +10,10 @@ const otherScripts = [];
 let styleHolder;
 let scriptHolder;
 
-window.__fatweaks = {};
+window.__fatweaks = {
+  loadedPlugins: new Set(),
+  failedPlugins: new Set()
+};
 
 // Queue plugins
 function queuePlugins(plugins) {
@@ -88,68 +91,139 @@ queuePlugins([
 
 // Style injection
 function createStyleHolder(root) {
+  const existing = document.getElementById("fatweaks-style-holder");
+  if (existing) return existing;
+
   const container = document.createElement("div");
   container.id = "fatweaks-style-holder";
   root.appendChild(container);
   return container;
 }
-
-function injectStyle(src, parent = document.head) {
-  const link = document.createElement("link");
-  link.rel = "stylesheet";
-  link.href = src;
-  parent.appendChild(link);
+function injectStyle(styleData, parent = document.head) {
+  return new Promise((resolve, reject) => {
+    const { namespace, url } = typeof styleData === 'string' 
+      ? { namespace: 'unknown', url: styleData }
+      : styleData;
+      
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = url;
+    link.dataset.plugin = namespace;
+    
+    link.onload = () => {
+      window.__fatweaks.loadedPlugins.add(namespace);
+      resolve();
+    };
+    
+    link.onerror = (err) => {
+      console.error(`Failed to load style: ${namespace}`, err);
+      window.__fatweaks.failedPlugins.add(namespace);
+      reject(err);
+    };
+    
+    parent.appendChild(link);
+  });
+}
+async function loadStyles() {
+  const stylePromises = queuedStylesheets.map(style => 
+    injectStyle(style, styleHolder).catch(err => {
+      console.warn(`Style loading error:`, err);
+    })
+  );
+  
+  await Promise.allSettled(stylePromises);
 }
 
-async function onHeadLoaded() {
-  styleHolder = createStyleHolder(document.documentElement);
-  queuedStylesheets.forEach(src => injectStyle(src, styleHolder));
-}
 
-onHeadLoaded();
-
-
-// Sequential script injection
+// Script injection
 function createScriptHolder(root) {
+  const existing = document.getElementById("fatweaks-script-holder");
+  if (existing) return existing;
+  
   const container = document.createElement("div");
   container.id = "fatweaks-script-holder";
   root.appendChild(container);
   return container;
 }
-
-function injectScriptSequentially(src, parent) {
+function injectScript(scriptData, parent) {
   return new Promise((resolve, reject) => {
+    const { namespace, url } = typeof scriptData === 'string'
+      ? { namespace: 'unknown', url: scriptData }
+      : scriptData;
+      
     const script = document.createElement("script");
-    script.src = src;
+    script.src = url;
     script.type = "module";
-    script.onload = resolve;
-    script.onerror = reject;
+    script.dataset.plugin = namespace;
+    
+    script.onload = () => {
+      window.__fatweaks.loadedPlugins.add(namespace);
+      resolve();
+    };
+    
+    script.onerror = (err) => {
+      console.error(`Failed to load plugin: ${namespace}`, err);
+      window.__fatweaks.failedPlugins.add(namespace);
+      reject(err);
+    };
+    
     parent.appendChild(script);
   });
 }
-
-async function onPageLoaded() {
-  scriptHolder = createScriptHolder(document.body);
-
-  for (const src of baseScripts) {
+async function loadScripts() {
+  for (const script of baseScripts) {
     try {
-      await injectScriptSequentially(src, scriptHolder);
+      await injectScript(script, scriptHolder);
     } catch (err) {
-      console.error(`Failed to load base script: ${src}`, err);
+      console.error(`Critical error loading base script: ${script.namespace || script}`, err);
+      if (script.namespace === 'modules' || script.namespace === 'events') {
+        console.error('Essential base module failed. Stopping plugin loading.');
+        return;
+      }
     }
   }
 
-  for (const src of otherScripts) {
-    try {
-      await injectScriptSequentially(src, scriptHolder);
-    } catch (err) {
-      console.error(`Failed to load plugin: ${src}`, err);
+  const scriptPromises = otherScripts.map(script => 
+    injectScript(script, scriptHolder).catch(err => {
+      console.warn(`Plugin loading error:`, err);
+    })
+  );
+
+  await Promise.allSettled(scriptPromises);
+  
+  document.dispatchEvent(new CustomEvent('fatweaks:allPluginsLoaded', {
+    detail: {
+      loadedPlugins: Array.from(window.__fatweaks.loadedPlugins),
+      failedPlugins: Array.from(window.__fatweaks.failedPlugins)
     }
-  }
+  }));
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+
+async function onHeadLoaded() {
+  styleHolder = createStyleHolder(document.documentElement);
+  await loadStyles();
+}
+async function onPageLoaded() {
+  scriptHolder = createScriptHolder(document.body);
+  await loadScripts();
+}
+onHeadLoaded();
+
+
+if (document.readyState === 'loading') {
+  document.addEventListener("DOMContentLoaded", onPageLoaded);
+} else {
   onPageLoaded();
-  styleHolder.parentNode.appendChild(styleHolder);
-  scriptHolder.parentNode.appendChild(scriptHolder);
+}
+
+// Removed the DOM reattachment because that might cause flicker
+document.addEventListener("DOMContentLoaded", () => {
+  if (styleHolder && !styleHolder.isConnected) {
+    document.documentElement.appendChild(styleHolder);
+  }
+  
+  if (scriptHolder && !scriptHolder.isConnected) {
+    document.body.appendChild(scriptHolder);
+  }
 });
