@@ -71,6 +71,7 @@ queuePlugins([
   ["liveStatus", SCRIPT],
   ["externalTargetBlank", SCRIPT | DEFAULT_PLUGIN],
 
+  ["furAffinAmp", STYLE | SCRIPT],
   ["liveStatusAlert", STYLE | SCRIPT],
   ["noGalleryPreview", STYLE | SCRIPT],
   ["showMeTheTags", STYLE | SCRIPT],

@@ -38,6 +38,14 @@ mySettings.boolean({
 });
 
 mySettings.boolean({
+  name: "FurAffinAmp",
+  shortDescription: "Shows a Webamp window on FurAffinity, where you can play and save music that you find on the site.",
+  authors: ["MeowcaTheoRange"],
+  id: "furAffinAmp",
+  defaultValue: false
+});
+
+mySettings.boolean({
   name: "\"I don't care if you're an admin! You're fucking up my schema!\"",
   shortDescription: "Removes the blue tint from admin comments.",
   authors: ["MeowcaTheoRange"],
