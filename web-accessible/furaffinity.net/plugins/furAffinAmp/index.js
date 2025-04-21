@@ -2,6 +2,33 @@ import "./webamp.bundle.min.js";
 
 const module = __fatweaks.namespace("furAffinAmp");
 
+const settings = __fatweaks.reference("settings");
+
+let mySettings = settings.register({
+  name: "FurAffinAmp (Webamp)",
+  namespace: "furAffinAmp"
+});
+
+let alwaysShowWebamp = mySettings.boolean({
+  name: "Always show Webamp",
+  shortDescription: "Don't hide the Webamp window when the playlist is empty",
+  id: "alwaysShowWebamp",
+  defaultValue: false
+});
+
+let autoFillWebamp = mySettings.boolean({
+  name: "Use Webamp for music submissions",
+  id: "autoFillWebamp",
+  defaultValue: true
+});
+
+let autoSaveList = mySettings.boolean({
+  name: "Auto-save playlist",
+  shortDescription: "Save playlist state when leaving the page",
+  id: "autoSaveList",
+  defaultValue: false
+});
+
 function extractArrayFrom() {
   return new Promise((res, rej) => {
     let iframe = document.createElement("iframe");
@@ -39,9 +66,12 @@ function getAudioData() {
 async function loadWebamp() {
   let newList = JSON.parse(localStorage.getItem("fatweaks_furAffinAmp_tracks") ?? "[]");
 
-  let audioData = getAudioData() ?? [];
+  let audioData;
+  if (autoFillWebamp)
+    audioData = getAudioData() ?? [];
+  else audioData = [];
 
-  if (audioData.length < 1 && newList.length < 1) return;
+  if (!alwaysShowWebamp && audioData.length < 1 && newList.length < 1) return;
 
   let container = document.createElement("div");
   container.id = "fatweaks-furAffinAmp-webampContainer";
@@ -50,9 +80,7 @@ async function loadWebamp() {
 
   module.webamp = new Webamp({
     handleLoadListEvent: () => JSON.parse(localStorage.getItem("fatweaks_furAffinAmp_tracks") ?? "[]"),
-    handleSaveListEvent: (tracks) => {
-      localStorage.setItem("fatweaks_furAffinAmp_tracks", JSON.stringify(tracks));
-    },
+    handleSaveListEvent: (tracks) => localStorage.setItem("fatweaks_furAffinAmp_tracks", JSON.stringify(tracks)),
     zIndex: 99999999,
   });
 
@@ -82,7 +110,10 @@ async function loadWebamp() {
         module.webamp.store.dispatch({ type: "BUFFER_TRACK", id: state.playlist.trackOrder.length });
         newTrack = true;
       } else {
-        module.webamp.store.dispatch({ type: "BUFFER_TRACK", id: state.playlist.trackOrder.indexOf(localstor.playlist.currentTrack) });
+        if (autoSaveList)
+          module.webamp.store.dispatch({ type: "BUFFER_TRACK", id: localstor.playlist.trackOrder.indexOf(localstor.playlist.currentTrack) });
+        else
+          module.webamp.store.dispatch({ type: "BUFFER_TRACK", id: state.playlist.trackOrder.indexOf(localstor.playlist.currentTrack) });
       }
     }
 
@@ -152,6 +183,18 @@ async function loadWebamp() {
       equalizer: state.equalizer,
       playlist: state.playlist
     };
+
+    let tracks = Object.values(state.tracks).map((track) => ({
+      metaData: {
+        artist: track.artist,
+        title: track.title
+      },
+      url: track.url
+    }));
+
+    let tracksInOrder = state.playlist.trackOrder.map(idx => tracks[idx]);
+
+    if (autoSaveList) localStorage.setItem("fatweaks_furAffinAmp_tracks", JSON.stringify(tracksInOrder));
 
     localStorage.setItem("fatweaks_furAffinAmp_state", JSON.stringify(obj));
 
