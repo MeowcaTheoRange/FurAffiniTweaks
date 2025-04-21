@@ -62,6 +62,7 @@ queuePlugins([
   ["settings", SCRIPT | BASE_PLUGIN],
   ["allToggleablePlugins", SCRIPT | BASE_PLUGIN],
   ["dropdownManager", SCRIPT | BASE_PLUGIN],
+  ["commentManager", SCRIPT | BASE_PLUGIN],
   ["faSettingsPage", SCRIPT | BASE_PLUGIN],
 
   // Plugins here
