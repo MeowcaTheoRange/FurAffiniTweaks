@@ -1,6 +1,6 @@
 - [ ] Disable Access To Minors Favourites
 - [x] Automatic redirect system messages
-- [ ] Gamebanana top/sidebar (for some reason)
+- [ ] ~~Gamebanana top/sidebar (for some reason)~~
 - [ ] Defontify (replace Unicode "cool fonts" with actual text)
 - [ ] Monolibrary for hiding metadata in a FA submission using 3y3 encoding
 - [ ] Alt Text (plugin that uses hidden metadata to hide alt text in submission descriptions)
@@ -9,3 +9,4 @@
 - [ ] https://www.furaffinity.net/view/38095884/
 - [ ] https://www.furaffinity.net/view/45128573/
 - [ ] https://www.furaffinity.net/view/39779598/, but for liveStatus
+- [ ] Keyboard navigation + "Skip to main content" for FA
