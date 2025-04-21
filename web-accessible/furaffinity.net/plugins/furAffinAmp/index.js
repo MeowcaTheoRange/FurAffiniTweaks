@@ -1,4 +1,4 @@
-import "./webamp.bundle.min.js";
+import "./webamp.lazy-bundle.min.js";
 
 const module = __fatweaks.namespace("furAffinAmp");
 
