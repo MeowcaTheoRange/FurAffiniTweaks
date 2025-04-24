@@ -190,6 +190,14 @@ mySettings.boolean({
 });
 
 mySettings.boolean({
+  name: "Unaccountability",
+  shortDescription: "Removes the aliases arrow next to users with Display Names enabled",
+  authors: ["MeowcaTheoRange"],
+  id: "unaccountability",
+  defaultValue: false
+});
+
+mySettings.boolean({
   name: "UwU",
   shortDescription: "Rewrites words to sound smol and adorbs~!",
   authors: ["Bexxi"],

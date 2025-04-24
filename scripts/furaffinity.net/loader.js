@@ -55,6 +55,7 @@ queuePlugins([
   ["resizeTextareaBoxes", STYLE | DEFAULT_PLUGIN],
   ["removeTopbarSupport", STYLE],
   ["removeTopbarTransactions", STYLE],
+  ["unaccountability", STYLE],
 
   // Base stuff, most plugins need at least one of these
   ["modules", SCRIPT | BASE_PLUGIN],
