@@ -2,11 +2,16 @@
 - [x] Automatic redirect system messages
 - [ ] ~~Gamebanana top/sidebar (for some reason)~~
 - [ ] Defontify (replace Unicode "cool fonts" with actual text)
-- [ ] Monolibrary for hiding metadata in a FA submission using 3y3 encoding
+- [ ] Userpage/submission page manager
+- [ ] 3y3 encoding manager (hide/store text in submission/user metadata)
 - [ ] Alt Text (plugin that uses hidden metadata to hide alt text in submission descriptions)
 - [ ] Custom User CSS (plugin that uses hidden metadata to hide CSS definitions in user page summaries)
-- [ ] Web games from FurAffniTweaks (see Alt Text and Custom User CSS, but for a web link)
+- [ ] Web games from FurAffiniTweaks (see Alt Text and Custom User CSS, but for a web link)
+- [ ] Watchlist manager
+- [ ] Local Storage manager
+- [ ] Text Replacement / Editing manager (for UwU and Defontify)
 - [ ] https://www.furaffinity.net/view/38095884/
 - [ ] https://www.furaffinity.net/view/45128573/
 - [ ] https://www.furaffinity.net/view/39779598/, but for liveStatus
 - [ ] Keyboard navigation + "Skip to main content" for FA
+- [ ] Welcome screen for FATweaks
