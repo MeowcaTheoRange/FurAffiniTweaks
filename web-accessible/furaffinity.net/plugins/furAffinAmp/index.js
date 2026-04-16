@@ -46,7 +46,7 @@ function extractArrayFrom() {
 
 function getAudioData() {
   /** @type {?HTMLAudioElement} */
-  let element = document.querySelector(".audio-player");
+  let element = document.querySelector(".c-musicPlayer_inner");
   let title = document.querySelector(".submission-title");
   let artist = document.querySelector(".c-usernameBlockSimple__displayName");
 

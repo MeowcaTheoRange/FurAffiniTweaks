@@ -60,6 +60,7 @@ queuePlugins([
   // Base stuff, most plugins need at least one of these
   ["modules", SCRIPT | BASE_PLUGIN],
   ["events", SCRIPT | BASE_PLUGIN],
+  ["uiManager", SCRIPT | BASE_PLUGIN],
   ["settings", SCRIPT | BASE_PLUGIN],
   ["allToggleablePlugins", SCRIPT | BASE_PLUGIN],
   ["dropdownManager", SCRIPT | BASE_PLUGIN],
